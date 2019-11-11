@@ -43,23 +43,34 @@ export class PaginatedList extends React.Component {
 
   handleClickUp = () => {
     console.debug("handleClickUp called");
+    var currentSort = this.state.currentSort;
     var nextPage = this.state.currentPage + 1;
     console.debug("handleClickUp sending " + nextPage);
-    this.doAxiosCalls(nextPage);
+    this.doAxiosCalls(nextPage, currentSort);
   };
+
+  handleClickDown = () => {
+    console.debug("handleClickDown called");
+    var currentSort = this.state.currentSort;
+    var nextPage = this.state.currentPage - 1;
+    console.debug("handleClickDown sending " + nextPage);
+    this.doAxiosCalls(nextPage, currentSort);
+  };
+
   handleClickSortNumber = () => {
     var currentSort = "usernumber";
-    var nextPage = this.state.currentPage;
+    var nextPage = 1;
     this.doAxiosCalls(nextPage, currentSort);
     console.log("Sort Clicked Number Clicked");
   };
 
   handleClickSortName = () => {
     var currentSort = "username";
-    var nextPage = this.state.currentPage;
+    var nextPage = 1;
     this.doAxiosCalls(nextPage, currentSort);
     console.log("Sort Clicked Name Clicked");
   };
+
   doAxiosCalls = (nextPage, currentSort) => {
     console.debug("doAxiosCalls Called");
     axios
@@ -75,6 +86,7 @@ export class PaginatedList extends React.Component {
         this.setState({
           data: res.data.docs,
           currentPage: nextPage,
+          currentSort: currentSort,
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
             res.data.offset + res.data.limit > res.data.total ? true : false
@@ -86,32 +98,34 @@ export class PaginatedList extends React.Component {
       });
   };
 
-  handleClickDown = () => {
-    console.debug("handleClickDown called");
-    var nextPage = this.state.currentPage - 1;
-    console.debug("handleClickDown sending " + nextPage);
-    this.doAxiosCalls(nextPage);
-  };
   render() {
     console.debug("currentPage in the render is  " + this.state.currentPage);
     return (
       <div>
         <Table celled>
-          <Table.Row>
+          <Table.Header>
             {" "}
-            <Button content="Number" onClick={this.handleClickSortNumber} />
-            <Button content="Name" onClick={this.handleClickSortName} />
-          </Table.Row>
+            <Table.Row>
+              {" "}
+              <Button content="Number" onClick={this.handleClickSortNumber} />
+              <Button content="Name" onClick={this.handleClickSortName} />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row>
+              <AxiosList data={this.state.data} />
+            </Table.Row>
+          </Table.Body>
         </Table>
-        <AxiosList data={this.state.data} />
+
         <Button
           disabled={this.state.disabledUpButton}
-          content="Next Name "
+          content="Next Page"
           onClick={this.handleClickUp}
         />
         <Button
           disabled={this.state.disabledDownButton}
-          content="Previous Name "
+          content="Previous Page"
           onClick={this.handleClickDown}
         />
         <h1>
@@ -119,6 +133,7 @@ export class PaginatedList extends React.Component {
           {this.state.currentPage},{this.state.currentPage + 1},
           {this.state.currentPage + 2}
         </h1>
+        <h1>Current Sort = {this.state.currentSort}</h1>
       </div>
     );
   }

@@ -9,9 +9,11 @@ export class PaginatedList extends React.Component {
     super();
     this.state = {
       data: [],
+      pagelimit: " ",
       currentPage: 1,
       disabledDownButton: true,
-      disabledUpButton: false
+      disabledUpButton: false,
+      sortColumn: "userphone"
     };
   }
 
@@ -23,7 +25,9 @@ export class PaginatedList extends React.Component {
       .then(res => {
         this.setState({
           data: res.data.docs,
+          pagelimit: res.data.limit,
           currentPage: this.state.currentPage,
+          sortColumn: this.state.sortColumn,
           disabledDownButton: this.state.disabledDownButton,
           disabledUpButton: this.state.disabledUpButton
         });
@@ -76,7 +80,11 @@ export class PaginatedList extends React.Component {
           content="Previous Name "
           onClick={this.handleClickDown}
         />
-        <h1>{this.state.currentPage}</h1>
+        <h1>
+          {this.state.currentpage - 2},{this.state.currentPage - 1},
+          {this.state.currentPage},{this.state.currentPage + 1},
+          {this.state.currentPage + 2}
+        </h1>
       </div>
     );
   }

@@ -4,10 +4,10 @@ let User = require("../models/user.model");
 router.route("/").get((req, res) => {
   const page = req.query.page;
   //console.log("page: " + req.query.page);
-  console.log(this.props.sortColumn);
+
   User.paginate(
     {},
-    { sort: { sortColumn: +1 }, offset: 10 * (page - 1), limit: 10 }
+    { sort: { usernumber: +1 }, offset: 10 * (page - 1), limit: 10 }
   )
     .then(result => res.json(result))
     .catch(err => res.status(400).json("Error: " + err));

@@ -12,8 +12,7 @@ export class PaginatedList extends React.Component {
       pagelimit: " ",
       currentPage: 1,
       disabledDownButton: true,
-      disabledUpButton: false,
-      sortColumn: "userphone"
+      disabledUpButton: false
     };
   }
 
@@ -27,7 +26,7 @@ export class PaginatedList extends React.Component {
           data: res.data.docs,
           pagelimit: res.data.limit,
           currentPage: this.state.currentPage,
-          sortColumn: this.state.sortColumn,
+
           disabledDownButton: this.state.disabledDownButton,
           disabledUpButton: this.state.disabledUpButton
         });

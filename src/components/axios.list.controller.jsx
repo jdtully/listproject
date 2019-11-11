@@ -26,7 +26,6 @@ export class PaginatedList extends React.Component {
           data: res.data.docs,
           pagelimit: res.data.limit,
           currentPage: this.state.currentPage,
-
           disabledDownButton: this.state.disabledDownButton,
           disabledUpButton: this.state.disabledUpButton
         });

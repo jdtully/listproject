@@ -3,8 +3,6 @@ let User = require("../models/user.model");
 
 router.route("/").get((req, res) => {
   const page = req.query.page;
-  //console.log("page: " + req.query.page);
-
   User.paginate(
     {},
     { sort: { usernumber: +1 }, offset: 10 * (page - 1), limit: 10 }

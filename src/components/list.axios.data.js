@@ -5,7 +5,7 @@ import { Table } from "semantic-ui-react";
 export class AxiosList extends React.Component {
   render() {
     return (
-      <Table>
+      <Table celled>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Number</Table.HeaderCell>{" "}

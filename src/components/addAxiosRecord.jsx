@@ -24,7 +24,7 @@ export class AddPersonAxios extends React.Component {
         currentusernumber: res.data.total,
         userphone: res.data.docs[0].userphone,
         userdate: this.state.userdate,
-        progress: "ready for entry"
+        progress: "Ready for entry"
       });
       console.log(
         "component did mount" + JSON.stringify(res.data.docs[0], null, 2)

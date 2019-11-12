@@ -72,18 +72,8 @@ export class PaginatedList extends React.Component {
     var currentSortDirection =
       this.state.currentSortDirection === "1" ? "-1" : "1";
     console.log(currentSortDirection);
-    var currentSortOrder = {};
-    currentSortOrder[currentSort] = currentSortDirection;
-    console.debug(
-      "currentSortOrder value is " + JSON.stringify(currentSortOrder)
-    );
     var pageToRender = 1;
-    this.doAxiosCalls(
-      pageToRender,
-      currentSortOrder,
-      currentSortDirection,
-      currentSort
-    );
+    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
     console.log("Sort Clicked Number Clicked");
   };
 

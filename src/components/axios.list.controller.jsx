@@ -24,15 +24,8 @@ export class PaginatedList extends React.Component {
     var currentSortDirection = this.state.currentSortDirection;
     console.log("Component did mountpage = " + pageToRender);
     console.log("Component did mountSort = " + currentSort);
-    var currentSortOrder = {};
-    currentSortOrder[currentSort] = currentSortDirection;
     console.debug("handleClickUp sending " + pageToRender);
-    this.doAxiosCalls(
-      pageToRender,
-      currentSortOrder,
-      currentSortDirection,
-      currentSort
-    );
+    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
   };
 
   handleClickUp = () => {
@@ -40,12 +33,11 @@ export class PaginatedList extends React.Component {
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.currentPage + 1;
-    var currentSortOrder = {};
-    currentSortOrder[currentSort] = currentSortDirection;
+
     console.debug("handleClickUp sending " + pageToRender);
     this.doAxiosCalls(
       pageToRender,
-      currentSortOrder,
+
       currentSortDirection,
       currentSort
     );
@@ -56,15 +48,8 @@ export class PaginatedList extends React.Component {
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.currentPage - 1;
-    var currentSortOrder = {};
-    currentSortOrder[currentSort] = currentSortDirection;
     console.debug("handleClickUp sending " + pageToRender);
-    this.doAxiosCalls(
-      pageToRender,
-      currentSortOrder,
-      currentSortDirection,
-      currentSort
-    );
+    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
   };
 
   handleClickSortNumber = () => {

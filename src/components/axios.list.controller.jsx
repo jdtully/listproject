@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
-
-import { Button, Table } from "semantic-ui-react";
+import { Button, Table, Icon } from "semantic-ui-react";
 import { AxiosList } from "./list.axios.data";
 
 export class PaginatedList extends React.Component {
@@ -12,6 +11,7 @@ export class PaginatedList extends React.Component {
       pagelimit: " ",
       currentPage: 1,
       currentSort: "usernumber",
+      currentSortDirection: "1",
       disabledDownButton: true,
       disabledUpButton: false
     };
@@ -19,79 +19,83 @@ export class PaginatedList extends React.Component {
 
   componentDidMount = () => {
     console.debug("componentDidMount" + JSON.stringify(this.state));
-    console.debug("componentdid mount counter" + this.state.currentPage);
-    axios
-      .get(
-        "http://localhost:5000/users/?page=" +
-          this.state.currentPage +
-          "&" +
-          "curSort=" +
-          this.state.currentSort
-      )
-      .then(res => {
-        this.setState({
-          data: res.data.docs,
-          pagelimit: res.data.limit,
-          currentSort: this.state.currentSort,
-          currentPage: this.state.currentPage,
-          disabledDownButton: this.state.disabledDownButton,
-          disabledUpButton: this.state.disabledUpButton
-        });
-      });
-    console.debug("headers= " + this.state.total);
+    var currentSort = this.state.currentSort;
+    var pageToRender = this.state.currentPage;
+    console.log("Component did mountpage = " + pageToRender);
+    console.log("Component did mountSort = " + currentSort);
+    this.doAxiosCalls(pageToRender, currentSort);
   };
 
   handleClickUp = () => {
     console.debug("handleClickUp called");
     var currentSort = this.state.currentSort;
-    var nextPage = this.state.currentPage + 1;
-    console.debug("handleClickUp sending " + nextPage);
-    this.doAxiosCalls(nextPage, currentSort);
+    var pageToRender = this.state.currentPage + 1;
+    console.debug("handleClickUp sending " + pageToRender);
+    this.doAxiosCalls(pageToRender, currentSort);
   };
 
   handleClickDown = () => {
     console.debug("handleClickDown called");
     var currentSort = this.state.currentSort;
-    var nextPage = this.state.currentPage - 1;
-    console.debug("handleClickDown sending " + nextPage);
-    this.doAxiosCalls(nextPage, currentSort);
+    var pageToRender = this.state.currentPage - 1;
+    console.debug("handleClickDown sending " + pageToRender);
+    this.doAxiosCalls(pageToRender, currentSort);
   };
 
   handleClickSortNumber = () => {
     var currentSort = "usernumber";
-    var nextPage = 1;
-    this.doAxiosCalls(nextPage, currentSort);
+    var currentSortDirection =
+      this.state.currentSortDirection === "1" ? "-1" : "1";
+    console.log(currentSortDirection);
+    var currentSortOrder = {};
+    currentSortOrder[currentSort] = currentSortDirection;
+    console.debug(
+      "currentSortOrder value is " + JSON.stringify(currentSortOrder)
+    );
+    var pageToRender = 1;
+    this.doAxiosCalls(
+      pageToRender,
+      currentSortOrder,
+      currentSortDirection,
+      currentSort
+    );
     console.log("Sort Clicked Number Clicked");
   };
 
   handleClickSortName = () => {
     var currentSort = "username";
-    var nextPage = 1;
-    this.doAxiosCalls(nextPage, currentSort);
+    var pageToRender = 1;
+    this.doAxiosCalls(pageToRender, currentSort);
     console.log("Sort Clicked Name Clicked");
   };
 
-  doAxiosCalls = (nextPage, currentSort) => {
+  doAxiosCalls = (
+    pageToRender,
+    currentSortOrder,
+    currentSortDirection,
+    currentSort
+  ) => {
     console.debug("doAxiosCalls Called");
     axios
       .get(
         "http://localhost:5000/users/?page=" +
-          nextPage +
+          pageToRender +
           "&" +
           "curSort=" +
-          currentSort
+          JSON.stringify(currentSortOrder)
       )
 
       .then(res => {
         this.setState({
           data: res.data.docs,
-          currentPage: nextPage,
+          currentPage: pageToRender,
           currentSort: currentSort,
+          currentSortDirection: currentSortDirection,
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
             res.data.offset + res.data.limit > res.data.total ? true : false
         });
-        console.debug("doAxiosCalls getting " + nextPage);
+        console.debug("doAxiosCalls getting " + pageToRender);
         console.debug("limit is " + res.data.limit);
         console.debug("offset is " + res.data.offset);
         console.debug("total number of records is " + res.data.total);
@@ -106,15 +110,20 @@ export class PaginatedList extends React.Component {
           <Table.Header>
             {" "}
             <Table.Row>
-              {" "}
-              <Button content="Number" onClick={this.handleClickSortNumber} />
-              <Button content="Name" onClick={this.handleClickSortName} />
+              <Table.HeaderCell>
+                {"Person Number   "}
+                <Button content="Number" onClick={this.handleClickSortNumber}>
+                  <Icon name="sort" />
+                </Button>
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+                {" "}
+                <Button content="Name" onClick={this.handleClickSortName} />
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            <Table.Row>
-              <AxiosList data={this.state.data} />
-            </Table.Row>
+            <AxiosList data={this.state.data} />
           </Table.Body>
         </Table>
 
@@ -129,7 +138,7 @@ export class PaginatedList extends React.Component {
           onClick={this.handleClickDown}
         />
         <h1>
-          {this.state.currentpage - 2},{this.state.currentPage - 1},
+          {this.state.currentPage - 2},{this.state.currentPage - 1},
           {this.state.currentPage},{this.state.currentPage + 1},
           {this.state.currentPage + 2}
         </h1>

@@ -4,8 +4,10 @@ let User = require("../models/user.model");
 router.route("/").get((req, res) => {
   const page = req.query.page;
   const curSort = req.query.curSort;
-
-  User.paginate({}, { sort: curSort, offset: 10 * (page - 1), limit: 10 })
+  console.log("router incoming sort " + curSort);
+  console.log("object" + JSON.parse(curSort));
+  const curSortObject = JSON.parse(curSort);
+  User.paginate({}, { sort: curSortObject, offset: 10 * (page - 1), limit: 10 })
     .then(result => res.json(result))
     .catch(err => res.status(400).json("Error: " + err));
 });

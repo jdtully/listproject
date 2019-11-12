@@ -12,7 +12,7 @@ export class AxiosList extends React.Component {
             <Table.Cell>{row.username}</Table.Cell>
             <Table.Cell>{row.userphone}</Table.Cell>
             <Table.Cell>{row.userdate}</Table.Cell>
-          </Table.Row>{" "}
+          </Table.Row>
         </React.Fragment>
       );
     });

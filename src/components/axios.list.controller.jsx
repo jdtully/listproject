@@ -13,7 +13,8 @@ export class PaginatedList extends React.Component {
       currentSort: "usernumber",
       currentSortDirection: "1",
       disabledDownButton: true,
-      disabledUpButton: false
+      disabledUpButton: false,
+      sortOrderDisplay: "  ascending"
     };
   }
 
@@ -33,7 +34,6 @@ export class PaginatedList extends React.Component {
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.currentPage + 1;
-
     console.debug("handleClickUp sending " + pageToRender);
     this.doAxiosCalls(
       pageToRender,
@@ -72,6 +72,8 @@ export class PaginatedList extends React.Component {
   };
 
   doAxiosCalls = (pageToRender, currentSortDirection, currentSort) => {
+    var sortOrderDisplay =
+      currentSortDirection === "1" ? "  ascending" : "  descending";
     var currentSortOrder = {};
     currentSortOrder[currentSort] = currentSortDirection;
     console.debug("doAxiosCalls Called");
@@ -90,6 +92,7 @@ export class PaginatedList extends React.Component {
           currentPage: pageToRender,
           currentSort: currentSort,
           currentSortDirection: currentSortDirection,
+          sortOrderDisplay: sortOrderDisplay,
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
             res.data.offset + res.data.limit > res.data.total ? true : false
@@ -143,7 +146,10 @@ export class PaginatedList extends React.Component {
           {this.state.currentPage},{this.state.currentPage + 1},
           {this.state.currentPage + 2}
         </h1>
-        <h1>Current Sort = {this.state.currentSort}</h1>
+        <h1>
+          Current Sort = {this.state.currentSort}
+          {this.state.sortOrderDisplay}
+        </h1>
       </div>
     );
   }

@@ -91,24 +91,14 @@ export class PaginatedList extends React.Component {
     var currentSort = "username";
     var currentSortDirection =
       this.state.currentSortDirection === "1" ? "-1" : "1";
-    var currentSortOrder = {};
-    currentSortOrder[currentSort] = currentSortDirection;
     var pageToRender = 1;
-    this.doAxiosCalls(
-      pageToRender,
-      currentSortOrder,
-      currentSortDirection,
-      currentSort
-    );
+    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
     console.log("Sort Clicked Name Clicked");
   };
 
-  doAxiosCalls = (
-    pageToRender,
-    currentSortOrder,
-    currentSortDirection,
-    currentSort
-  ) => {
+  doAxiosCalls = (pageToRender, currentSortDirection, currentSort) => {
+    var currentSortOrder = {};
+    currentSortOrder[currentSort] = currentSortDirection;
     console.debug("doAxiosCalls Called");
     axios
       .get(

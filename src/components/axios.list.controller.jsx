@@ -151,8 +151,10 @@ export class PaginatedList extends React.Component {
                 </Button>
               </Table.HeaderCell>
               <Table.HeaderCell>
-                {" "}
-                <Button content="Name" onClick={this.handleClickSortName} />
+                {" Name of Person "}
+                <Button content="Name" onClick={this.handleClickSortName}>
+                  <Icon name="sort" />
+                </Button>
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>

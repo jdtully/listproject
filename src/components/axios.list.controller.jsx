@@ -21,25 +21,50 @@ export class PaginatedList extends React.Component {
     console.debug("componentDidMount" + JSON.stringify(this.state));
     var currentSort = this.state.currentSort;
     var pageToRender = this.state.currentPage;
+    var currentSortDirection = this.state.currentSortDirection;
     console.log("Component did mountpage = " + pageToRender);
     console.log("Component did mountSort = " + currentSort);
-    this.doAxiosCalls(pageToRender, currentSort);
+    var currentSortOrder = {};
+    currentSortOrder[currentSort] = currentSortDirection;
+    console.debug("handleClickUp sending " + pageToRender);
+    this.doAxiosCalls(
+      pageToRender,
+      currentSortOrder,
+      currentSortDirection,
+      currentSort
+    );
   };
 
   handleClickUp = () => {
     console.debug("handleClickUp called");
     var currentSort = this.state.currentSort;
+    var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.currentPage + 1;
+    var currentSortOrder = {};
+    currentSortOrder[currentSort] = currentSortDirection;
     console.debug("handleClickUp sending " + pageToRender);
-    this.doAxiosCalls(pageToRender, currentSort);
+    this.doAxiosCalls(
+      pageToRender,
+      currentSortOrder,
+      currentSortDirection,
+      currentSort
+    );
   };
 
   handleClickDown = () => {
     console.debug("handleClickDown called");
     var currentSort = this.state.currentSort;
+    var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.currentPage - 1;
-    console.debug("handleClickDown sending " + pageToRender);
-    this.doAxiosCalls(pageToRender, currentSort);
+    var currentSortOrder = {};
+    currentSortOrder[currentSort] = currentSortDirection;
+    console.debug("handleClickUp sending " + pageToRender);
+    this.doAxiosCalls(
+      pageToRender,
+      currentSortOrder,
+      currentSortDirection,
+      currentSort
+    );
   };
 
   handleClickSortNumber = () => {

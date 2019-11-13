@@ -70,7 +70,14 @@ export class PaginatedList extends React.Component {
     this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
     console.log("Sort Clicked Name Clicked");
   };
+  handleClickGoToPage1 = () => {
+    var currentSort = this.state.currentSort;
+    var currentSortDirection = this.state.currentSortDirection;
+    var pageToRender = 1;
+    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
 
+    console.log("Left double arrows clicked");
+  };
   doAxiosCalls = (pageToRender, currentSortDirection, currentSort) => {
     var sortOrderDisplay =
       currentSortDirection === "1" ? "  ascending" : "  descending";
@@ -155,12 +162,21 @@ export class PaginatedList extends React.Component {
             content: <Icon name="ellipsis horizontal" />,
             icon: true
           }}
-          firstItem={{ content: <Icon name="angle double left" />, icon: true }}
+          firstItem={{
+            content: <Icon name="angle double left" />,
+            icon: true,
+            onClick: this.handleClickGoToPage1
+          }}
           lastItem={{ content: <Icon name="angle double right" />, icon: true }}
           prevItem={{
             content: <Icon name="angle left" />,
             icon: true,
             onClick: this.handleClickDown
+          }}
+          nextItem={{
+            content: <Icon name="angle right" />,
+            icon: true,
+            onClick: this.handleClickUp
           }}
           totalPages={this.state.pagelimit}
         />

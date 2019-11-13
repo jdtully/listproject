@@ -37,40 +37,31 @@ export class PaginatedList extends React.Component {
     var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.currentPage + 1;
     console.debug("clickNext sending " + pageToRender);
-    this.doAxiosCalls(
-      pageToRender,
-
-      currentSortDirection,
-      currentSort
-    );
+    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
   };
 
   clickPrev = () => {
     console.debug("clickPrev called");
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
-    var pageToRender = this.state.currentPage - 1;
+    var pageToRender =
+      this.state.currentPage - 1 > 0
+        ? this.state.currentPage - 1
+        : this.state.currentPage;
     console.debug("clickPrev sending " + pageToRender);
     this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
   };
 
-  sortNumberAscending = () => {
+  sortNumberToggle = () => {
     var currentSort = "usernumber";
-    var currentSortDirection = "1";
+    var currentSortDirection =
+      this.state.currentSortDirection === "1" ? "-1" : "1";
     console.log(currentSortDirection);
     var pageToRender = 1;
     this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
-    console.log("Sort Clicked Number Ascending Clicked");
+    console.log("Sort Clicked Number toggle");
   };
 
-  sortNumberDescending = () => {
-    var currentSort = "usernumber";
-    var currentSortDirection = "-1";
-    console.log(currentSortDirection);
-    var pageToRender = 1;
-    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
-    console.log("Sort Clicked Number descending Clicked");
-  };
   onClick = event => {
     console.log(event); // => nullified object.
     console.log(event.type); // => "click"
@@ -84,14 +75,15 @@ export class PaginatedList extends React.Component {
     this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
     console.log("Sort Clicked Name Clicked");
   };
+
   handleClickGoToPage1 = () => {
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = 1;
     this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
-
     console.log("Left double arrows clicked");
   };
+
   handleClickGoToPageLast = () => {
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
@@ -145,17 +137,21 @@ export class PaginatedList extends React.Component {
             <Table.Row>
               <Table.HeaderCell>
                 {" "}
-                <Icon
-                  fitted
-                  name="sort ascending"
-                  onClick={this.sortNumberAscending}
-                />{" "}
-                {"Acct. Number   "}
-                <Icon
-                  fitted
-                  name="sort descending"
-                  onClick={this.sortNumberDescending}
-                />
+                {"Acct. Number   "}{" "}
+                <Icon.Group>
+                  {" "}
+                  <Icon
+                    disabled
+                    fitted
+                    name="sort ascending"
+                    onClick={this.sortNumberToggle}
+                  />{" "}
+                  <Icon
+                    fitted
+                    name="sort descending"
+                    onClick={this.sortNumberToggle}
+                  />
+                </Icon.Group>
               </Table.HeaderCell>
               <Table.HeaderCell>
                 {" Name of Person "}
@@ -193,21 +189,25 @@ export class PaginatedList extends React.Component {
           firstItem={{
             content: <Icon name="angle double left" />,
             icon: true,
+            disabled: this.state.disabledDownButton,
             onClick: this.handleClickGoToPage1
           }}
           lastItem={{
             content: <Icon name="angle double right" />,
             icon: true,
+            disabled: this.state.disabledUpButton,
             onClick: this.handleClickGoToPageLast
           }}
           prevItem={{
             content: <Icon name="angle left" />,
+            disabled: this.state.disabledDownButton,
             icon: true,
             onClick: this.clickPrev
           }}
           nextItem={{
             content: <Icon name="angle right" />,
             icon: true,
+            disabled: this.state.disabledUpButton,
             onClick: this.clickNext
           }}
           totalPages={this.state.limit}

@@ -118,7 +118,7 @@ export class PaginatedList extends React.Component {
           total: res.data.total,
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
-            res.data.offset + res.data.limit > res.data.total ? true : false
+            res.data.offset + 1 + res.data.limit > res.data.total ? true : false
         });
         console.debug("doAxiosCalls getting " + pageToRender);
         console.debug("limit is " + res.data.limit);

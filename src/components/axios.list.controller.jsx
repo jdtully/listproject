@@ -45,23 +45,35 @@ export class PaginatedList extends React.Component {
     );
   };
 
-  handleClickDown = () => {
-    console.debug("handleClickDown called");
+  clickPrev = () => {
+    console.debug("clickPrev called");
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.currentPage - 1;
-    console.debug("clickNext sending " + pageToRender);
+    console.debug("clickPrev sending " + pageToRender);
     this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
   };
 
-  handleClickSortNumber = () => {
+  sortNumberAscending = () => {
     var currentSort = "usernumber";
-    var currentSortDirection =
-      this.state.currentSortDirection === "1" ? "-1" : "1";
+    var currentSortDirection = "1";
     console.log(currentSortDirection);
     var pageToRender = 1;
     this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
-    console.log("Sort Clicked Number Clicked");
+    console.log("Sort Clicked Number Ascending Clicked");
+  };
+
+  sortNumberDescending = () => {
+    var currentSort = "usernumber";
+    var currentSortDirection = "-1";
+    console.log(currentSortDirection);
+    var pageToRender = 1;
+    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
+    console.log("Sort Clicked Number descending Clicked");
+  };
+  onClick = event => {
+    console.log(event); // => nullified object.
+    console.log(event.type); // => "click"
   };
 
   handleClickSortName = () => {
@@ -132,8 +144,18 @@ export class PaginatedList extends React.Component {
             {" "}
             <Table.Row>
               <Table.HeaderCell>
+                {" "}
+                <Icon
+                  fitted
+                  name="sort ascending"
+                  onClick={this.sortNumberAscending}
+                />{" "}
                 {"Acct. Number   "}
-                <Icon name="sort" onClick={this.handleClickSortNumber} />
+                <Icon
+                  fitted
+                  name="sort descending"
+                  onClick={this.sortNumberDescending}
+                />
               </Table.HeaderCell>
               <Table.HeaderCell>
                 {" Name of Person "}
@@ -156,7 +178,7 @@ export class PaginatedList extends React.Component {
         <Button
           disabled={this.state.disabledDownButton}
           content="Previous Page"
-          onClick={this.handleClickDown}
+          onClick={this.clickPrev}
         />
         <h1>
           Current Sort = {this.state.currentSort}
@@ -181,7 +203,7 @@ export class PaginatedList extends React.Component {
           prevItem={{
             content: <Icon name="angle left" />,
             icon: true,
-            onClick: this.handleClickDown
+            onClick: this.clickPrev
           }}
           nextItem={{
             content: <Icon name="angle right" />,

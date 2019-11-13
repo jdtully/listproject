@@ -108,22 +108,20 @@ export class PaginatedList extends React.Component {
     console.debug("currentPage in the render is  " + this.state.currentPage);
     return (
       <div>
-        <Table celled>
+        <Table celled striped collapsing>
           <Table.Header>
             {" "}
             <Table.Row>
               <Table.HeaderCell>
-                {"Person Number   "}
-                <Button content="Number" onClick={this.handleClickSortNumber}>
-                  <Icon name="sort" />
-                </Button>
+                {"Acct. Number   "}
+                <Icon name="sort" onClick={this.handleClickSortNumber} />
               </Table.HeaderCell>
               <Table.HeaderCell>
                 {" Name of Person "}
-                <Button content="Name" onClick={this.handleClickSortName}>
-                  <Icon name="sort" />
-                </Button>
+                <Icon name="sort" onClick={this.handleClickSortName} />
               </Table.HeaderCell>
+              <Table.HeaderCell>Phone number</Table.HeaderCell>
+              <Table.HeaderCell>Customer since</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>

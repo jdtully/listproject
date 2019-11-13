@@ -27,16 +27,16 @@ export class PaginatedList extends React.Component {
     var currentSortDirection = this.state.currentSortDirection;
     console.log("Component did mountpage = " + pageToRender);
     console.log("Component did mountSort = " + currentSort);
-    console.debug("handleClickUp sending " + pageToRender);
+    console.debug("clickNext sending " + pageToRender);
     this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
   };
 
-  handleClickUp = () => {
-    console.debug("handleClickUp called");
+  clickNext = () => {
+    console.debug("clickNext called");
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.currentPage + 1;
-    console.debug("handleClickUp sending " + pageToRender);
+    console.debug("clickNext sending " + pageToRender);
     this.doAxiosCalls(
       pageToRender,
 
@@ -50,7 +50,7 @@ export class PaginatedList extends React.Component {
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.currentPage - 1;
-    console.debug("handleClickUp sending " + pageToRender);
+    console.debug("clickNext sending " + pageToRender);
     this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
   };
 
@@ -151,7 +151,7 @@ export class PaginatedList extends React.Component {
         <Button
           disabled={this.state.disabledUpButton}
           content="Next Page"
-          onClick={this.handleClickUp}
+          onClick={this.clickNext}
         />
         <Button
           disabled={this.state.disabledDownButton}
@@ -186,7 +186,7 @@ export class PaginatedList extends React.Component {
           nextItem={{
             content: <Icon name="angle right" />,
             icon: true,
-            onClick: this.handleClickUp
+            onClick: this.clickNext
           }}
           totalPages={this.state.limit}
         />

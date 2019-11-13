@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Button, Table, Icon } from "semantic-ui-react";
+import { Button, Table, Icon, Pagination } from "semantic-ui-react";
 import { AxiosList } from "./list.axios.data";
 
 export class PaginatedList extends React.Component {
@@ -93,6 +93,7 @@ export class PaginatedList extends React.Component {
           currentSort: currentSort,
           currentSortDirection: currentSortDirection,
           sortOrderDisplay: sortOrderDisplay,
+          pagelimit: res.data.limit,
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
             res.data.offset + res.data.limit > res.data.total ? true : false
@@ -148,6 +149,21 @@ export class PaginatedList extends React.Component {
           Current Sort = {this.state.currentSort}
           {this.state.sortOrderDisplay}
         </h1>
+        <Pagination
+          defaultActivePage={5}
+          ellipsisItem={{
+            content: <Icon name="ellipsis horizontal" />,
+            icon: true
+          }}
+          firstItem={{ content: <Icon name="angle double left" />, icon: true }}
+          lastItem={{ content: <Icon name="angle double right" />, icon: true }}
+          prevItem={{
+            content: <Icon name="angle left" />,
+            icon: true,
+            onClick: this.handleClickDown
+          }}
+          totalPages={this.state.pagelimit}
+        />
       </div>
     );
   }

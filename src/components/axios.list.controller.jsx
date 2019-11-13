@@ -8,7 +8,9 @@ export class PaginatedList extends React.Component {
     super();
     this.state = {
       data: [],
-      pagelimit: " ",
+      limit: " ",
+      offset: " ",
+      total: "",
       currentPage: 1,
       currentSort: "usernumber",
       currentSortDirection: "1",
@@ -78,6 +80,14 @@ export class PaginatedList extends React.Component {
 
     console.log("Left double arrows clicked");
   };
+  handleClickGoToPageLast = () => {
+    var currentSort = this.state.currentSort;
+    var currentSortDirection = this.state.currentSortDirection;
+    var pageToRender = this.state.total / this.state.limit;
+    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
+    console.log("Right Double Arrows Clicked");
+  };
+
   doAxiosCalls = (pageToRender, currentSortDirection, currentSort) => {
     var sortOrderDisplay =
       currentSortDirection === "1" ? "  ascending" : "  descending";
@@ -100,7 +110,8 @@ export class PaginatedList extends React.Component {
           currentSort: currentSort,
           currentSortDirection: currentSortDirection,
           sortOrderDisplay: sortOrderDisplay,
-          pagelimit: res.data.limit,
+          limit: res.data.limit,
+          total: res.data.total,
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
             res.data.offset + res.data.limit > res.data.total ? true : false
@@ -148,11 +159,6 @@ export class PaginatedList extends React.Component {
           onClick={this.handleClickDown}
         />
         <h1>
-          {this.state.currentPage - 2},{this.state.currentPage - 1},
-          {this.state.currentPage},{this.state.currentPage + 1},
-          {this.state.currentPage + 2}
-        </h1>
-        <h1>
           Current Sort = {this.state.currentSort}
           {this.state.sortOrderDisplay}
         </h1>
@@ -167,7 +173,11 @@ export class PaginatedList extends React.Component {
             icon: true,
             onClick: this.handleClickGoToPage1
           }}
-          lastItem={{ content: <Icon name="angle double right" />, icon: true }}
+          lastItem={{
+            content: <Icon name="angle double right" />,
+            icon: true,
+            onClick: this.handleClickGoToPageLast
+          }}
           prevItem={{
             content: <Icon name="angle left" />,
             icon: true,
@@ -178,7 +188,7 @@ export class PaginatedList extends React.Component {
             icon: true,
             onClick: this.handleClickUp
           }}
-          totalPages={this.state.pagelimit}
+          totalPages={this.state.limit}
         />
       </div>
     );

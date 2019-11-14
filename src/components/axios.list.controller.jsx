@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Button, Table, Icon, Pagination } from "semantic-ui-react";
 import { AxiosList } from "./list.axios.data";
+import { FastField } from "formik";
 
 export class PaginatedList extends React.Component {
   constructor() {
@@ -14,6 +15,11 @@ export class PaginatedList extends React.Component {
       currentPage: 1,
       currentSort: "usernumber",
       currentSortDirection: "1",
+      disableSortNumberUpArrow: false,
+      disableSortNumberDownArrow: false,
+      disableSortNameUpArrow: false,
+      disableSortnameDownArrow: false,
+
       disabledDownButton: true,
       disabledUpButton: false,
       sortOrderDisplay: "  ascending"
@@ -116,6 +122,7 @@ export class PaginatedList extends React.Component {
           sortOrderDisplay: sortOrderDisplay,
           limit: res.data.limit,
           total: res.data.total,
+          totalPages: Math.floor(this.state.total / this.state.limit),
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
             res.data.offset + 1 + res.data.limit > res.data.total ? true : false
@@ -141,13 +148,14 @@ export class PaginatedList extends React.Component {
                 <Icon.Group>
                   {" "}
                   <Icon
-                    disabled
+                    disabled={true}
                     fitted
                     name="sort ascending"
                     onClick={this.sortNumberToggle}
                   />{" "}
                   <Icon
                     fitted
+                    disabled={true}
                     name="sort descending"
                     onClick={this.sortNumberToggle}
                   />
@@ -210,7 +218,7 @@ export class PaginatedList extends React.Component {
             disabled: this.state.disabledUpButton,
             onClick: this.clickNext
           }}
-          totalPages={this.state.limit}
+          totalPages={this.state.totalPages}
         />
       </div>
     );

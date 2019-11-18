@@ -130,11 +130,15 @@ export class PaginatedList extends React.Component {
           disableSortNumberUpArrow:
             this.state.currentSort === "usernumber" &&
             this.state.currentSortDirection === "1"
-              ? true
-              : false,
-          disableSortNumberDownArrow: false,
+              ? "green"
+              : "grey",
+          disableSortNumberDownArrow:
+            this.state.currentSort === "usernumber" &&
+            this.state.currentSortDirection === "-1"
+              ? "green"
+              : "grey",
           disableSortNameUpArrow: false,
-          disableSortnameDownArrow: false
+          disableSortNameDownArrow: false
         });
         console.debug("doAxiosCalls getting " + pageToRender);
         console.debug("limit is " + res.data.limit);
@@ -161,14 +165,14 @@ export class PaginatedList extends React.Component {
                 <Icon.Group>
                   {" "}
                   <Icon
-                    disabled={this.state.disableSortNumberUpArrow}
+                    color={this.state.disableSortNumberUpArrow}
                     fitted
                     name="sort ascending"
                     onClick={this.sortNumberToggle}
                   />{" "}
                   <Icon
                     fitted
-                    disabled={this.state.disableSortnameDownArrow}
+                    color={this.state.disableSortNumberDownArrow}
                     name="sort descending"
                     onClick={this.sortNumberToggle}
                   />

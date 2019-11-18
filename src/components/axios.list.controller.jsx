@@ -14,10 +14,10 @@ export class PaginatedList extends React.Component {
       currentPage: 1,
       currentSort: "usernumber",
       currentSortDirection: "1",
-      disableSortNumberUpArrow: false,
+      colorSortNumberUpArrow: false,
       disableSortNumberDownArrow: false,
       disableSortNameUpArrow: false,
-      disableSortnameDownArrow: false,
+      disableSortNameDownArrow: false,
 
       disabledDownButton: true,
       disabledUpButton: false,
@@ -127,7 +127,7 @@ export class PaginatedList extends React.Component {
             res.data.offset + 1 + res.data.limit > res.data.total
               ? true
               : false,
-          disableSortNumberUpArrow:
+          colorSortNumberUpArrow:
             this.state.currentSort === "usernumber" &&
             this.state.currentSortDirection === "1"
               ? "green"
@@ -165,7 +165,7 @@ export class PaginatedList extends React.Component {
                 <Icon.Group>
                   {" "}
                   <Icon
-                    color={this.state.disableSortNumberUpArrow}
+                    color={this.state.colorSortNumberUpArrow}
                     fitted
                     name="sort ascending"
                     onClick={this.sortNumberToggle}

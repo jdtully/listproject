@@ -12,12 +12,13 @@ export class PaginatedList extends React.Component {
       offset: " ",
       total: "",
       currentPage: 1,
+      totalPages: "",
       currentSort: "usernumber",
       currentSortDirection: "1",
-      colorSortNumberUpArrow: false,
-      disableSortNumberDownArrow: false,
-      disableSortNameUpArrow: false,
-      disableSortNameDownArrow: false,
+      colorSortNumberUpArrow: "grey",
+      colorSortNumberDownArrow: "grey",
+      colorSortNameUpArrow: "grey",
+      colorSortNameDownArrow: "grey",
 
       disabledDownButton: true,
       disabledUpButton: false,
@@ -72,7 +73,7 @@ export class PaginatedList extends React.Component {
     console.log(event.type); // => "click"
   };
 
-  handleClickSortName = () => {
+  sortNameToggle = () => {
     var currentSort = "username";
     var currentSortDirection =
       this.state.currentSortDirection === "1" ? "-1" : "1";
@@ -121,24 +122,33 @@ export class PaginatedList extends React.Component {
           sortOrderDisplay: sortOrderDisplay,
           limit: res.data.limit,
           total: res.data.total,
-          totalPages: Math.floor(this.state.total / this.state.limit),
+          totalPages: Math.ceil(res.data.total / res.data.limit),
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
             res.data.offset + 1 + res.data.limit > res.data.total
               ? true
               : false,
+
           colorSortNumberUpArrow:
             this.state.currentSort === "usernumber" &&
             this.state.currentSortDirection === "1"
               ? "green"
               : "grey",
-          disableSortNumberDownArrow:
+          colorSortNumberDownArrow:
             this.state.currentSort === "usernumber" &&
             this.state.currentSortDirection === "-1"
               ? "green"
               : "grey",
-          disableSortNameUpArrow: false,
-          disableSortNameDownArrow: false
+          colorSortNameUpArrow:
+            this.state.currentSort === "username" &&
+            this.state.currentSortDirection === "1"
+              ? "green"
+              : "grey",
+          colorSortNameDownArrow:
+            this.state.currentSort === "username" &&
+            this.state.currentSortDirection === "-1"
+              ? "green"
+              : "grey"
         });
         console.debug("doAxiosCalls getting " + pageToRender);
         console.debug("limit is " + res.data.limit);
@@ -148,6 +158,7 @@ export class PaginatedList extends React.Component {
           "current sort direction = " + this.state.currentSortDirection
         );
         console.debug("currentSortOrder is " + currentSort);
+        console.debug("total Pages =  " + this.state.totalPages);
       });
   };
 
@@ -172,7 +183,7 @@ export class PaginatedList extends React.Component {
                   />{" "}
                   <Icon
                     fitted
-                    color={this.state.disableSortNumberDownArrow}
+                    color={this.state.colorSortNumberDownArrow}
                     name="sort descending"
                     onClick={this.sortNumberToggle}
                   />
@@ -180,7 +191,22 @@ export class PaginatedList extends React.Component {
               </Table.HeaderCell>
               <Table.HeaderCell>
                 {" Name of Person "}
-                <Icon name="sort" onClick={this.handleClickSortName} />
+
+                <Icon.Group>
+                  {" "}
+                  <Icon
+                    color={this.state.colorSortNameUpArrow}
+                    fitted
+                    name="sort ascending"
+                    onClick={this.sortNameToggle}
+                  />{" "}
+                  <Icon
+                    fitted
+                    color={this.state.colorSortNameDownArrow}
+                    name="sort descending"
+                    onClick={this.sortNameToggle}
+                  />
+                </Icon.Group>
               </Table.HeaderCell>
               <Table.HeaderCell>Phone number</Table.HeaderCell>
               <Table.HeaderCell>Customer since</Table.HeaderCell>

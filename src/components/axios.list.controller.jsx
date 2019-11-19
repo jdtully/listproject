@@ -122,13 +122,14 @@ export class PaginatedList extends React.Component {
           sortOrderDisplay: sortOrderDisplay,
           limit: res.data.limit,
           total: res.data.total,
-          totalPages: Math.ceil(res.data.total / res.data.limit),
+          totalPages: Math.ceil(res.data.total / res.data.limit)
+        });
+        this.setState({
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
             res.data.offset + 1 + res.data.limit > res.data.total
               ? true
               : false,
-
           colorSortNumberUpArrow:
             this.state.currentSort === "usernumber" &&
             this.state.currentSortDirection === "1"

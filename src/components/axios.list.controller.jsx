@@ -63,7 +63,10 @@ export class PaginatedList extends React.Component {
   sortNumberToggle = () => {
     var currentSort = "usernumber";
     var currentSortDirection =
-      this.state.currentSortDirection === "1" ? "-1" : "1";
+      this.state.currentSort === "usernumber" &&
+      this.state.currentSortDirection === "1"
+        ? "-1"
+        : "1";
     console.log(currentSortDirection);
     var pageToRender = 1;
     this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
@@ -77,9 +80,11 @@ export class PaginatedList extends React.Component {
 
   sortNameToggle = () => {
     var currentSort = "username";
-
     var currentSortDirection =
-      this.state.currentSortDirection === "1" ? "-1" : "1";
+      this.state.currentSort === "username" &&
+      this.state.currentSortDirection === "1"
+        ? "-1"
+        : "1";
     var pageToRender = 1;
     this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
     console.log("Sort Clicked Name Clicked");
@@ -97,8 +102,8 @@ export class PaginatedList extends React.Component {
   handleClickGoToPageLast = () => {
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
-    var pageToRender = this.state.total / this.state.limit;
-    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
+    var pageToRender = Math.ceil(this.state.total / this.state.limit);
+    this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
     console.log("Right Double Arrows Clicked");
   };
 

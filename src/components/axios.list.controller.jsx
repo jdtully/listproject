@@ -136,22 +136,22 @@ export class PaginatedList extends React.Component {
               : false,
           colorSortNumberUpArrow:
             this.state.currentSort === "usernumber" &&
-            this.state.currentNumberSortDirection === "1"
+            this.state.currentSortDirection === "1"
               ? "green"
               : "grey",
           colorSortNumberDownArrow:
             this.state.currentSort === "usernumber" &&
-            this.state.currentNumberSortDirection === "-1"
+            this.state.currentSortDirection === "-1"
               ? "green"
               : "grey",
           colorSortNameUpArrow:
             this.state.currentSort === "username" &&
-            this.state.currentNameSortDirection === "1"
+            this.state.currentSortDirection === "1"
               ? "green"
               : "grey",
           colorSortNameDownArrow:
             this.state.currentSort === "username" &&
-            this.state.currentNameSortDirection === "-1"
+            this.state.currentSortDirection === "-1"
               ? "green"
               : "grey"
         });

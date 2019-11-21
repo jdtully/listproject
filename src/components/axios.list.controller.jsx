@@ -13,8 +13,9 @@ export class PaginatedList extends React.Component {
       total: "",
       currentPage: 1,
       totalPages: "",
-      currentNumberSort: "usernumber",
-      currentNumberSortDirection: "1",
+      currentSort: "usernumber",
+      currentSortDirection: "1",
+
       colorSortNumberUpArrow: "grey",
       colorSortNumberDownArrow: "grey",
       colorSortNameUpArrow: "grey",
@@ -28,59 +29,44 @@ export class PaginatedList extends React.Component {
 
   componentDidMount = () => {
     console.debug("componentDidMount" + JSON.stringify(this.state));
-    var currentNumberSort = this.state.currentNumberSort;
+    var currentSort = this.state.currentSort;
     var pageToRender = this.state.currentPage;
-    var currentNumberSortDirection = this.state.currentNumberSortDirection;
+    var currentSortDirection = this.state.currentSortDirection;
     console.log("Component did mountpage = " + pageToRender);
-    console.log("Component did mountSort = " + currentNumberSort);
+
     console.debug("clickNext sending " + pageToRender);
-    this.doAxiosCalls(
-      pageToRender,
-      currentNumberSortDirection,
-      currentNumberSort
-    );
+    this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
   };
 
   clickNext = () => {
     console.debug("clickNext called");
-    var currentNumberSort = this.state.currentNumberSort;
-    var currentNumberSortDirection = this.state.currentNumberSortDirection;
+    var currentSort = this.state.currentSort;
+
+    var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.currentPage + 1;
     console.debug("clickNext sending " + pageToRender);
-    this.doAxiosCalls(
-      pageToRender,
-      currentNumberSortDirection,
-      currentNumberSort
-    );
+    this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
   };
 
   clickPrev = () => {
     console.debug("clickPrev called");
-    var currentNumberSort = this.state.currentNumberSort;
-    var currentNumberSortDirection = this.state.currentNumberSortDirection;
+    var currentSort = this.state.currentSort;
+    var currentSortDirection = this.state.currentSortDirection;
     var pageToRender =
       this.state.currentPage - 1 > 0
         ? this.state.currentPage - 1
         : this.state.currentPage;
     console.debug("clickPrev sending " + pageToRender);
-    this.doAxiosCalls(
-      pageToRender,
-      currentNumberSortDirection,
-      currentNumberSort
-    );
+    this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
   };
 
   sortNumberToggle = () => {
-    var currentNumberSort = "usernumber";
-    var currentNumberSortDirection =
-      this.state.currentNumberSortDirection === "1" ? "-1" : "1";
-    console.log(currentNumberSortDirection);
+    var currentSort = "usernumber";
+    var currentSortDirection =
+      this.state.currentSortDirection === "1" ? "-1" : "1";
+    console.log(currentSortDirection);
     var pageToRender = 1;
-    this.doAxiosCalls(
-      pageToRender,
-      currentNumberSortDirection,
-      currentNumberSort
-    );
+    this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
     console.log("Sort Clicked Number toggle");
   };
 
@@ -90,51 +76,37 @@ export class PaginatedList extends React.Component {
   };
 
   sortNameToggle = () => {
-    var currentNumberSort = "username";
-    var currentNumberSortDirection =
-      this.state.currentNumberSortDirection === "1" ? "-1" : "1";
+    var currentSort = "username";
+
+    var currentSortDirection =
+      this.state.currentSortDirection === "1" ? "-1" : "1";
     var pageToRender = 1;
-    this.doAxiosCalls(
-      pageToRender,
-      currentNumberSortDirection,
-      currentNumberSort
-    );
+    this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
     console.log("Sort Clicked Name Clicked");
   };
 
   handleClickGoToPage1 = () => {
-    var currentNumberSort = this.state.currentNumberSort;
-    var currentNumberSortDirection = this.state.currentNumberSortDirection;
+    var currentSort = this.state.currentSort;
+
+    var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = 1;
-    this.doAxiosCalls(
-      pageToRender,
-      currentNumberSortDirection,
-      currentNumberSort
-    );
+    this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
     console.log("Left double arrows clicked");
   };
 
   handleClickGoToPageLast = () => {
-    var currentNumberSort = this.state.currentNumberSort;
-    var currentNumberSortDirection = this.state.currentNumberSortDirection;
+    var currentSort = this.state.currentSort;
+    var currentSortDirection = this.state.currentSortDirection;
     var pageToRender = this.state.total / this.state.limit;
-    this.doAxiosCalls(
-      pageToRender,
-      currentNumberSortDirection,
-      currentNumberSort
-    );
+    this.doAxiosCalls(pageToRender, currentSortDirection, currentSort);
     console.log("Right Double Arrows Clicked");
   };
 
-  doAxiosCalls = (
-    pageToRender,
-    currentNumberSortDirection,
-    currentNumberSort
-  ) => {
+  doAxiosCalls = (pageToRender, currentSort, currentSortDirection) => {
     var sortOrderDisplay =
-      currentNumberSortDirection === "1" ? "  ascending" : "  descending";
-    var currentNumberSortOrder = {};
-    currentNumberSortOrder[currentNumberSort] = currentNumberSortDirection;
+      currentSortDirection === "1" ? "  ascending" : "  descending";
+    var currentSortOrder = {};
+    currentSortOrder[currentSort] = currentSortDirection;
     console.debug("doAxiosCalls Called");
     axios
       .get(
@@ -142,15 +114,15 @@ export class PaginatedList extends React.Component {
           pageToRender +
           "&" +
           "curSort=" +
-          JSON.stringify(currentNumberSortOrder)
+          JSON.stringify(currentSortOrder)
       )
 
       .then(res => {
         this.setState({
           data: res.data.docs,
           currentPage: pageToRender,
-          currentNumberSort: currentNumberSort,
-          currentNumberSortDirection: currentNumberSortDirection,
+          currentSort: currentSort,
+          currentSortDirection: currentSortDirection,
           sortOrderDisplay: sortOrderDisplay,
           limit: res.data.limit,
           total: res.data.total,
@@ -163,23 +135,23 @@ export class PaginatedList extends React.Component {
               ? true
               : false,
           colorSortNumberUpArrow:
-            this.state.currentNumberSort === "usernumber" &&
+            this.state.currentSort === "usernumber" &&
             this.state.currentNumberSortDirection === "1"
               ? "green"
               : "grey",
           colorSortNumberDownArrow:
-            this.state.currentNumberSort === "usernumber" &&
+            this.state.currentSort === "usernumber" &&
             this.state.currentNumberSortDirection === "-1"
               ? "green"
               : "grey",
           colorSortNameUpArrow:
-            this.state.currentNumberSort === "username" &&
-            this.state.currentNumberSortDirection === "1"
+            this.state.currentSort === "username" &&
+            this.state.currentNameSortDirection === "1"
               ? "green"
               : "grey",
           colorSortNameDownArrow:
-            this.state.currentNumberSort === "username" &&
-            this.state.currentNumberSortDirection === "-1"
+            this.state.currentSort === "username" &&
+            this.state.currentNameSortDirection === "-1"
               ? "green"
               : "grey"
         });
@@ -190,7 +162,7 @@ export class PaginatedList extends React.Component {
         console.debug(
           "current sort direction = " + this.state.currentNumberSortDirection
         );
-        console.debug("currentNumberSortOrder is " + currentNumberSort);
+
         console.debug("total Pages =  " + this.state.totalPages);
       });
   };

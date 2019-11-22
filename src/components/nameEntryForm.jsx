@@ -1,6 +1,9 @@
 import React from "react";
 
 import { Formik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape();
 
 export class EntryForm extends React.Component {
   render() {

@@ -108,6 +108,9 @@ export class PaginatedList extends React.Component {
       console.log(response.data);
       console.log("doDelete clicked " + id);
     });
+    this.setState({
+      data: this.state.data.filter(el => el._id !== id)
+    });
   };
 
   handleClickGoToPageLast = () => {

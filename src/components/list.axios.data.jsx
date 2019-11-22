@@ -15,6 +15,12 @@ export class AxiosList extends React.Component {
             <Table.Cell>
               <Icon name="pen square" onClick={this.props.doEdit} />
             </Table.Cell>
+            <Table.Cell>
+              <Icon
+                name="trash alternate outline"
+                onClick={this.props.doDelete}
+              />
+            </Table.Cell>
           </Table.Row>
         </React.Fragment>
       );

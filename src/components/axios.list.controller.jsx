@@ -102,6 +102,10 @@ export class PaginatedList extends React.Component {
     console.log("doedit clicked ");
   };
 
+  doDelete = () => {
+    console.log("doDelete clicked ");
+  };
+
   handleClickGoToPageLast = () => {
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
@@ -227,7 +231,11 @@ export class PaginatedList extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            <AxiosList data={this.state.data} doEdit={this.doEdit} />
+            <AxiosList
+              data={this.state.data}
+              doEdit={this.doEdit}
+              doDelete={this.doDelete}
+            />
           </Table.Body>
         </Table>
 

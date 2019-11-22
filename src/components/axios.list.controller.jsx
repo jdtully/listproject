@@ -99,11 +99,15 @@ export class PaginatedList extends React.Component {
     console.log("Left double arrows clicked");
   };
   doEdit = () => {
-    console.log("doedit clicked ");
+    console.log("doEdit clicked ");
   };
 
-  doDelete = () => {
-    console.log("doDelete clicked ");
+  doDelete = _id => {
+    var id = JSON.parse(_id, null, 2);
+    axios.delete("http://localhost:5000/users/" + id).then(response => {
+      console.log(response.data);
+      console.log("doDelete clicked " + id);
+    });
   };
 
   handleClickGoToPageLast = () => {

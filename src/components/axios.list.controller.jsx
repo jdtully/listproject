@@ -98,6 +98,9 @@ export class PaginatedList extends React.Component {
     this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
     console.log("Left double arrows clicked");
   };
+  doEdit = () => {
+    console.log("doedit clicked ");
+  };
 
   handleClickGoToPageLast = () => {
     var currentSort = this.state.currentSort;
@@ -220,10 +223,11 @@ export class PaginatedList extends React.Component {
               </Table.HeaderCell>
               <Table.HeaderCell>Phone number</Table.HeaderCell>
               <Table.HeaderCell>Customer since</Table.HeaderCell>
+              <Table.HeaderCell>Edit</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            <AxiosList data={this.state.data} />
+            <AxiosList data={this.state.data} doEdit={this.doEdit} />
           </Table.Body>
         </Table>
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Table } from "semantic-ui-react";
+import { Table, Icon } from "semantic-ui-react";
 
 export class AxiosList extends React.Component {
   render() {
@@ -12,6 +12,9 @@ export class AxiosList extends React.Component {
             <Table.Cell>{row.username}</Table.Cell>
             <Table.Cell>{row.userphone}</Table.Cell>
             <Table.Cell>{row.userdate}</Table.Cell>
+            <Table.Cell>
+              <Icon name="pen square" onClick={this.props.doEdit} />
+            </Table.Cell>
           </Table.Row>
         </React.Fragment>
       );

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Formik } from "formik";
+
 export class EntryForm extends React.Component {
   render() {
     return (
@@ -11,10 +12,10 @@ export class EntryForm extends React.Component {
           {({ values, errors, touched, handleChange, handleBlur }) => (
             <form>
               <div className="input-row">
-                <label htmlFor="name">Username :</label>
+                <label htmlFor="username">Username :</label>
                 <input
                   type="text"
-                  name="name"
+                  name="username"
                   id="name"
                   placeholder="Enter your name"
                   onChange={handleChange}
@@ -22,11 +23,23 @@ export class EntryForm extends React.Component {
                   value={values.username}
                 />
               </div>
+              <div className="input-row">
+                <label htmlFor="usernumber">Usernumber :</label>
+                <input
+                  type="text"
+                  name="usernumber"
+                  id="number"
+                  placeholder="Enter your Phone number"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.usernumber}
+                />
+              </div>
             </form>
           )}
         </Formik>
-        <h3>usernumber {this.state.usernumber}</h3>
-        <h1>Status is {this.state.progress}</h1>
+        <h3>usernumber {"Holder"}</h3>
+        <h1>Status is {"holder"}</h1>
       </div>
     );
   }

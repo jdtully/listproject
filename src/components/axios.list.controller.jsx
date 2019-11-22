@@ -235,6 +235,7 @@ export class PaginatedList extends React.Component {
               <Table.HeaderCell>Phone number</Table.HeaderCell>
               <Table.HeaderCell>Customer since</Table.HeaderCell>
               <Table.HeaderCell>Edit</Table.HeaderCell>
+              <Table.HeaderCell>Del</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>

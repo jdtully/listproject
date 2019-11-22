@@ -16,7 +16,7 @@ export class AxiosList extends React.Component {
             <Table.Cell>{row.userphone}</Table.Cell>
             <Table.Cell>{row.userdate}</Table.Cell>
             <Table.Cell>
-              <Button onClick={this.props.doEdit}>
+              <Button onClick={() => this.doEdit(row.id)}>
                 <Icon name="edit" />
                 {JSON.stringify(row._id)}
               </Button>

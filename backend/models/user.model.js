@@ -6,25 +6,23 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    usernumber: {
-      type: Number,
-      min: 1,
-      trim: true
-    },
     username: {
       type: String,
+      trim: true,
       required: true,
       trim: true,
       minlength: 3
     },
-    userphone: { type: Number },
-    userdate: { type: Date, required: false, trim: true }
-
+    userdate: { type: Date, required: true, trim: true, minlength: 6 },
+    useremail: { type: String, trim: true, required: true, trim: true },
+    usergender: { type: String, trim: true, required: true, trim: true },
+    userstreet: { type: String, trim: true, required: true },
+    usercity: { type: String, trim: true, required: true },
+    userstate: { type: String, trim: true, required: true },
+    userzip: { type: String, trim: true, required: true },
+    userphone: { type: String, trim: true, required: true }
   },
-
-  {
-    timestamps: true
-  }
+  { timestamps: true }
 );
 userSchema.plugin(mongoosePaginate);
 const User = mongoose.model("User", userSchema);

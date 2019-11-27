@@ -9,7 +9,7 @@ export class AddPersonAxios extends React.Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.state = {
       users: [],
-      currentusernumber: null,
+      currentusernumber: "",
       username: "",
       userphone: "",
       progress: "",
@@ -18,27 +18,20 @@ export class AddPersonAxios extends React.Component {
   }
 
   componentDidMount = () => {
-    axios.get("http://localhost:5000/users/").then(res => {
-      this.setState({
-        users: res.data.docs,
-        username: res.data.docs[0].username,
-        currentusernumber: res.data.total,
-        userphone: res.data.docs[0].userphone,
-        userdate: this.state.userdate,
-        progress: "Ready for entry"
-      });
-      console.log(
-        "component did mount" + JSON.stringify(res.data.docs[0], null, 2)
-      );
-    });
-  };
+    axios
+      .get(
+        "http://localhost:5000/users/?page=1&curSort={%22usernumber%22:%221%22}"
+      )
 
+      .then(res =>
+        console.log(
+          "component did mount" + JSON.stringify(res.data.docs[0], null, 2)
+        )
+      );
+  };
   onSubmit = e => {
     e.preventDefault();
     var usernumberholder = this.state.currentusernumber + 1;
-    console.log(
-      " OnSubmit usernumberHolder after increment  is " + usernumberholder
-    );
     var today = new Date();
     var date =
       today.getMonth() + 1 + "-" + today.getDate() + "-" + today.getFullYear();

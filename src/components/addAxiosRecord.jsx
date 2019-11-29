@@ -35,15 +35,8 @@ export class AddPersonAxios extends React.Component {
   };
   onSubmit = e => {
     e.preventDefault();
-
-    var today = new Date();
-    var date =
-      today.getMonth() + 1 + "-" + today.getDate() + "-" + today.getFullYear();
-    console.log(" the  reported  date is" + date);
-
     const user = {
       username: this.state.username,
-      userdate: this.state.userdate,
       useremail: this.state.useremail,
       usergender: this.state.usergender,
       userstreet: this.state.userstreet,
@@ -67,7 +60,6 @@ export class AddPersonAxios extends React.Component {
   onChangeUserName = e => {
     this.setState({
       username: e.target.value,
-
       progress: "Enter name  and press enter"
     });
     console.log(

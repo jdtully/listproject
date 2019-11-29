@@ -6,21 +6,25 @@ import { Form, Button } from "semantic-ui-react";
 export class AddPersonAxios extends React.Component {
   constructor(props) {
     super(props);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    //this.onChangeUserName = this.onChangeUserName.bind(this);
     this.state = {
       users: [],
-      currentusernumber: "",
       username: "",
-      userphone: "",
-      progress: "",
-      userdate: ""
+      userdate: "",
+      useremail: "",
+      usergender: "",
+      userstreet: "",
+      usercity: "",
+      userstate: "",
+      userzip: "",
+      userphone: ""
     };
   }
 
   componentDidMount = () => {
     axios
       .get(
-        "http://localhost:5000/users/?page=1&curSort={%22usernumber%22:%221%22}"
+        "http://localhost:5000/users/?page=1&curSort={%22username%22:%221%22}"
       )
 
       .then(res =>
@@ -31,17 +35,22 @@ export class AddPersonAxios extends React.Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    var usernumberholder = this.state.currentusernumber + 1;
+
     var today = new Date();
     var date =
       today.getMonth() + 1 + "-" + today.getDate() + "-" + today.getFullYear();
     console.log(" the  reported  date is" + date);
 
     const user = {
-      usernumber: usernumberholder,
       username: this.state.username,
-      userphone: this.state.userphone,
-      userdate: date
+      userdate: this.state.userdate,
+      useremail: this.state.useremail,
+      usergender: this.state.usergender,
+      userstreet: this.state.userstreet,
+      usercity: this.state.usercity,
+      userstate: this.state.userstate,
+      userzip: this.state.userzip,
+      userphone: this.state.string
     };
 
     console.log(user);
@@ -53,6 +62,98 @@ export class AddPersonAxios extends React.Component {
 
       console.log(res.data);
     });
+  };
+
+  onChangeUserName = e => {
+    this.setState({
+      username: e.target.value,
+
+      progress: "Enter name  and press enter"
+    });
+    console.log(
+      "onChangeUsername triggered new " +
+        JSON.stringify(e.target.value, null, 2)
+    );
+    console.log(JSON.stringify(this.state));
+  };
+
+  onChangeUserEmail = e => {
+    this.setState({
+      useremail: e.target.value,
+
+      progress: "Enter E-mail"
+    });
+    console.log(
+      "onChangeUserEmail triggered new " +
+        JSON.stringify(e.target.value, null, 2)
+    );
+    console.log(JSON.stringify(this.state));
+    console.log("changed E-mail");
+  };
+
+  onChangeUserGender = e => {
+    this.setState({
+      usergender: e.target.value,
+
+      progress: "Enter Gender"
+    });
+    console.log(
+      "onChangeUserGender triggered new " +
+        JSON.stringify(e.target.value, null, 2)
+    );
+    console.log(JSON.stringify(this.state));
+    console.log("changed Phone number");
+  };
+  onChangeUserStreet = e => {
+    this.setState({
+      userstreet: e.target.value,
+
+      progress: "Enter Street Name"
+    });
+    console.log(
+      "onChangeUserStreet triggered new " +
+        JSON.stringify(e.target.value, null, 2)
+    );
+    console.log(JSON.stringify(this.state));
+    console.log("changed Street Name");
+  };
+  onChangeUserCity = e => {
+    this.setState({
+      usercity: e.target.value,
+
+      progress: "Enter City"
+    });
+    console.log(
+      "onChangeUserCity triggered new " +
+        JSON.stringify(e.target.value, null, 2)
+    );
+    console.log(JSON.stringify(this.state));
+    console.log("changed City");
+  };
+  onChangeUserState = e => {
+    this.setState({
+      userstate: e.target.value,
+
+      progress: "Enter State"
+    });
+    console.log(
+      "onChangeUserState triggered new " +
+        JSON.stringify(e.target.value, null, 2)
+    );
+    console.log(JSON.stringify(this.state));
+    console.log("changed State");
+  };
+  onChangeUserZip = e => {
+    this.setState({
+      userzip: e.target.value,
+
+      progress: "Enter Zip Code"
+    });
+    console.log(
+      "onChangeUserZip triggered new " + JSON.stringify(e.target.value, null, 2)
+    );
+    console.log(JSON.stringify(this.state));
+    console.log("changed Zip");
   };
   onChangeUserPhone = e => {
     this.setState({
@@ -68,19 +169,6 @@ export class AddPersonAxios extends React.Component {
     console.log("changed Phone number");
   };
 
-  onChangeUsername = e => {
-    this.setState({
-      username: e.target.value,
-
-      progress: "Enter name  and press enter"
-    });
-    console.log(
-      "onChangeUsername triggered new " +
-        JSON.stringify(e.target.value, null, 2)
-    );
-    console.log(JSON.stringify(this.state));
-  };
-
   render() {
     return (
       <div>
@@ -91,9 +179,38 @@ export class AddPersonAxios extends React.Component {
             <Form.Input
               label="Name"
               value={this.state.username}
-              onChange={this.onChangeUsername}
+              onChange={this.onChangeUserName}
             />
-
+            <Form.Input
+              label="E-mail"
+              value={this.state.useremail}
+              onChange={this.onChangeUserEmail}
+            />
+            <Form.Input
+              label="Gender"
+              value={this.state.usergender}
+              onChange={this.onChangeUserGender}
+            />{" "}
+            <Form.Input
+              label="Street Address"
+              value={this.state.userstreet}
+              onChange={this.onChangeUserStreet}
+            />{" "}
+            <Form.Input
+              label="City"
+              value={this.state.usercity}
+              onChange={this.onChangeUserCity}
+            />{" "}
+            <Form.Input
+              label="State"
+              value={this.state.userstate}
+              onChange={this.onChangeUserState}
+            />{" "}
+            <Form.Input
+              label="Postal Code"
+              value={this.state.userzip}
+              onChange={this.onChangeUserZip}
+            />
             <Form.Input
               label="Phone"
               value={this.state.userphone}

@@ -12,13 +12,30 @@ router.route("/").get((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
-/*router.route("/add").post((req, res) => {
- const usernumber = req.body.usernumber;
-const username = req.body.username;
-const userphone = req.body.userphone;
- const userdate = req.body.userdate;
+router.route("/add").post((req, res) => {
+  const username = req.body.username;
+  const useremail = req.body.useremail;
+  const userdate = req.body.userdate;
 
- const newUser = new User({ usernumber, username, userphone, userdate });
+  const usergender = req.body.usergender;
+  const userstreet = req.body.userstreet;
+  const usercity = req.body.usercity;
+  const userstate = req.body.userstate;
+  const userzip = req.body.userzip;
+  const userphone = req.body.userphone;
+
+  const newUser = new User({
+    username,
+    useremail,
+    userdate,
+    usergender,
+    userstreet,
+    usercity,
+    userstate,
+    userzip,
+    userphone,
+    userdate
+  });
   newUser
     .save()
     .then(() => res.json("User added!"))
@@ -54,5 +71,5 @@ router.route("/update/:id").post((req, res) => {
     })
     .catch(err => res.status(400).json("Error: " + err));
 });
-*/
+
 module.exports = router;

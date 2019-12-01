@@ -15,7 +15,6 @@ router.route("/").get((req, res) => {
 router.route("/add").post((req, res) => {
   const username = req.body.username;
   const useremail = req.body.useremail;
-  const userdate = req.body.userdate;
   const usergender = req.body.usergender;
   const userstreet = req.body.userstreet;
   const usercity = req.body.usercity;
@@ -26,14 +25,12 @@ router.route("/add").post((req, res) => {
   const newUser = new User({
     username,
     useremail,
-    userdate,
     usergender,
     userstreet,
     usercity,
     userstate,
     userzip,
-    userphone,
-    userdate
+    userphone
   });
   newUser
     .save()

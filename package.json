@@ -19,6 +19,7 @@
     "semantic-ui-react-formik": "^1.0.7",
     "storybook": "^5.1.11",
     "tsutils": "^3.17.1",
+    "validator": "^12.1.0",
     "yup": "^0.27.0"
   },
   "scripts": {
@@ -45,9 +46,9 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.2.6",
-    "@storybook/addon-links": "^5.2.6",
-    "@storybook/addons": "^5.2.6",
-    "@storybook/react": "^5.2.6"
+    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-links": "^5.2.8",
+    "@storybook/addons": "^5.2.8",
+    "@storybook/react": "^5.2.8"
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Button, Table, Icon, Pagination } from "semantic-ui-react";
 import { AxiosList } from "./list.axios.data";
-//import { editUser } from "./editUser";
+import { doEdit } from "./editUser";
 
 export class PaginatedList extends React.Component {
   constructor() {
@@ -16,7 +16,7 @@ export class PaginatedList extends React.Component {
       totalPages: "",
       currentSort: "username",
       currentSortDirection: "1",
-
+      userToEdit: " ",
       colorSortDateUpArrow: "grey",
       colorSortDateDownArrow: "grey",
       colorSortNameUpArrow: "grey",
@@ -100,6 +100,8 @@ export class PaginatedList extends React.Component {
     console.log("Left double arrows clicked");
   };
   doEdit = _id => {
+    doEdit(_id => this.props._id);
+
     console.log("doEdit clicked " + _id);
   };
 

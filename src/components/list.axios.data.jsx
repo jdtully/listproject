@@ -13,8 +13,13 @@ export class AxiosList extends React.Component {
           <Table.Row key={i}>
             <Table.Cell>{row.username}</Table.Cell>
             <Table.Cell>{row.userstreet}</Table.Cell>
+            <Table.Cell>{row.usercity}</Table.Cell>
+            <Table.Cell>{row.userstate}</Table.Cell>
+            <Table.Cell>{row.userzip}</Table.Cell>
             <Table.Cell>{row.userphone}</Table.Cell>
-            <Table.Cell>{row.userdate}</Table.Cell>
+            <Table.Cell>{row.useremail}</Table.Cell>
+            <Table.Cell>{row.usergender}</Table.Cell>
+            <Table.Cell>{row.createdAt}</Table.Cell>
             <Table.Cell>
               <Button onClick={() => this.doEdit(row.id)}>
                 <Icon name="edit" />

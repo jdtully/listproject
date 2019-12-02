@@ -213,10 +213,15 @@ export class PaginatedList extends React.Component {
                   />
                 </Icon.Group>
               </Table.HeaderCell>
-              <Table.HeaderCell>Phone number</Table.HeaderCell>
+              <Table.HeaderCell>Street</Table.HeaderCell>
+              <Table.HeaderCell>City</Table.HeaderCell>
+              <Table.HeaderCell>State</Table.HeaderCell>
+              <Table.HeaderCell>Zip Code</Table.HeaderCell>
+              <Table.HeaderCell>Phone</Table.HeaderCell>
+              <Table.HeaderCell>Email</Table.HeaderCell>
+              <Table.HeaderCell>Gender</Table.HeaderCell>
               <Table.HeaderCell>
-                {" "}
-                {"Acct. Number   "}{" "}
+                {"Cusetomer Since "}
                 <Icon.Group>
                   {" "}
                   <Icon

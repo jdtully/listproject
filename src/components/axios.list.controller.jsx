@@ -13,7 +13,7 @@ export class PaginatedList extends React.Component {
       total: "",
       currentPage: 1,
       totalPages: "",
-      currentSort: "usernumber",
+      currentSort: "username",
       currentSortDirection: "1",
 
       colorSortNumberUpArrow: "grey",
@@ -195,25 +195,6 @@ export class PaginatedList extends React.Component {
             {" "}
             <Table.Row>
               <Table.HeaderCell>
-                {" "}
-                {"Acct. Number   "}{" "}
-                <Icon.Group>
-                  {" "}
-                  <Icon
-                    color={this.state.colorSortNumberUpArrow}
-                    fitted
-                    name="sort ascending"
-                    onClick={this.sortNumberToggle}
-                  />{" "}
-                  <Icon
-                    fitted
-                    color={this.state.colorSortNumberDownArrow}
-                    name="sort descending"
-                    onClick={this.sortNumberToggle}
-                  />
-                </Icon.Group>
-              </Table.HeaderCell>
-              <Table.HeaderCell>
                 {" Name of Person "}
 
                 <Icon.Group>
@@ -233,7 +214,25 @@ export class PaginatedList extends React.Component {
                 </Icon.Group>
               </Table.HeaderCell>
               <Table.HeaderCell>Phone number</Table.HeaderCell>
-              <Table.HeaderCell>Customer since</Table.HeaderCell>
+              <Table.HeaderCell>
+                {" "}
+                {"Acct. Number   "}{" "}
+                <Icon.Group>
+                  {" "}
+                  <Icon
+                    color={this.state.colorSortNumberUpArrow}
+                    fitted
+                    name="sort ascending"
+                    onClick={this.sortNumberToggle}
+                  />{" "}
+                  <Icon
+                    fitted
+                    color={this.state.colorSortNumberDownArrow}
+                    name="sort descending"
+                    onClick={this.sortNumberToggle}
+                  />
+                </Icon.Group>
+              </Table.HeaderCell>
               <Table.HeaderCell>Edit</Table.HeaderCell>
               <Table.HeaderCell>Del</Table.HeaderCell>
             </Table.Row>

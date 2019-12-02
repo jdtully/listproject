@@ -8,7 +8,6 @@ export class AxiosList extends React.Component {
   };
   doEdit = _id => {
     this.props.doEdit(JSON.stringify(_id, null, 2));
-    console.log("rowbuilder ID " + JSON.stringify(_id, null, 2));
   };
   render() {
     return this.props.data.map((row, i) => {

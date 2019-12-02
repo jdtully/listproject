@@ -53,12 +53,17 @@ router.route("/:id").delete((req, res) => {
 });
 
 router.route("/update/:id").post((req, res) => {
-  User.findById(req.params.id)
+  User.findByIdAndUpdate(req.params.id)
     .then(users => {
-      users.usernumber = req.body.usernumber;
       users.username = req.body.username;
+      users.userstreet = req.body.userstreet;
+      users.usercity = req.body.usercity;
+      users.userstate = req.body.userstate;
+      users.userzip = req.body.userzip;
       users.userphone = req.body.userphone;
       users.userdate = req.body.userdate;
+      users.useremail = req.body.useremail;
+      users.usergender = req.body.usergender;
 
       users
         .save()

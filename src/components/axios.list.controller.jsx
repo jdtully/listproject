@@ -16,8 +16,8 @@ export class PaginatedList extends React.Component {
       currentSort: "username",
       currentSortDirection: "1",
 
-      colorSortNumberUpArrow: "grey",
-      colorSortNumberDownArrow: "grey",
+      colorSortDateUpArrow: "grey",
+      colorSortDateDownArrow: "grey",
       colorSortNameUpArrow: "grey",
       colorSortNameDownArrow: "grey",
 
@@ -60,17 +60,17 @@ export class PaginatedList extends React.Component {
     this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
   };
 
-  sortNumberToggle = () => {
-    var currentSort = "usernumber";
+  sortDateToggle = () => {
+    var currentSort = "createdAt";
     var currentSortDirection =
-      this.state.currentSort === "usernumber" &&
+      this.state.currentSort === "createdAt" &&
       this.state.currentSortDirection === "1"
         ? "-1"
         : "1";
-    console.log(currentSortDirection);
+    console.log("toggler" + currentSortDirection);
     var pageToRender = 1;
     this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
-    console.log("Sort Clicked Number toggle");
+    console.log("Sort Clicked Date toggle");
   };
 
   onClick = event => {
@@ -153,13 +153,13 @@ export class PaginatedList extends React.Component {
             res.data.offset + 1 + res.data.limit > res.data.total
               ? true
               : false,
-          colorSortNumberUpArrow:
-            this.state.currentSort === "usernumber" &&
+          colorSortDateUpArrow:
+            this.state.currentSort === "createdAt" &&
             this.state.currentSortDirection === "1"
               ? "green"
               : "grey",
-          colorSortNumberDownArrow:
-            this.state.currentSort === "usernumber" &&
+          colorSortDateDownArrow:
+            this.state.currentSort === "createdAt" &&
             this.state.currentSortDirection === "-1"
               ? "green"
               : "grey",
@@ -179,7 +179,7 @@ export class PaginatedList extends React.Component {
         console.debug("offset is " + res.data.offset);
         console.debug("total number of records is " + res.data.total);
         console.debug(
-          "current sort direction = " + this.state.currentNumberSortDirection
+          "current sort direction = " + this.state.currentSortDirection
         );
 
         console.debug("total Pages =  " + this.state.totalPages);
@@ -221,20 +221,20 @@ export class PaginatedList extends React.Component {
               <Table.HeaderCell>Email</Table.HeaderCell>
               <Table.HeaderCell>Gender</Table.HeaderCell>
               <Table.HeaderCell>
-                {"Cusetomer Since "}
+                {"Customer Since "}
                 <Icon.Group>
                   {" "}
                   <Icon
-                    color={this.state.colorSortNumberUpArrow}
+                    color={this.state.colorSortDateUpArrow}
                     fitted
                     name="sort ascending"
-                    onClick={this.sortNumberToggle}
+                    onClick={this.sortDateToggle}
                   />{" "}
                   <Icon
                     fitted
-                    color={this.state.colorSortNumberDownArrow}
+                    color={this.state.colorSortDateDownArrow}
                     name="sort descending"
-                    onClick={this.sortNumberToggle}
+                    onClick={this.sortDateToggle}
                   />
                 </Icon.Group>
               </Table.HeaderCell>
@@ -261,10 +261,7 @@ export class PaginatedList extends React.Component {
           content="Previous Page"
           onClick={this.clickPrev}
         />
-        <h1>
-          Current Sort = {this.state.currentNumberSort}
-          {this.state.sortOrderDisplay}
-        </h1>
+        <h1>Current Sort ={this.state.sortOrderDisplay}</h1>
         <Pagination
           defaultActivePage={this.state.currentPage}
           ellipsisItem={{

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Button, Table, Icon, Pagination } from "semantic-ui-react";
 import { AxiosList } from "./list.axios.data";
+//import { editUser } from "./editUser";
 
 export class PaginatedList extends React.Component {
   constructor() {
@@ -98,8 +99,8 @@ export class PaginatedList extends React.Component {
     this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
     console.log("Left double arrows clicked");
   };
-  doEdit = () => {
-    console.log("doEdit clicked ");
+  doEdit = _id => {
+    console.log("doEdit clicked " + _id);
   };
 
   doDelete = _id => {

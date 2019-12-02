@@ -5,8 +5,6 @@ import { Form, Button } from "semantic-ui-react";
 export class EditUser extends React.Component {
   constructor(props) {
     super(props);
-    //this.onChangeUserName = this.onChangeUserName.bind(this);
-    //this.onchangeUserStreet = this.onChangeUserStreet.bind(this);
     this.state = {
       data: [],
       username: "",
@@ -16,7 +14,7 @@ export class EditUser extends React.Component {
       userstate: "",
       userzip: "",
       userphone: "",
-      usertoedit: "5de523e89fa9f21ee937814d",
+      usertoedit: "",
       nameError: false,
       emailError: false,
       streetError: false,
@@ -35,6 +33,7 @@ export class EditUser extends React.Component {
       .then(
         res =>
           this.setState({
+            usertoedit: res.data._id,
             username: res.data.username,
             userstreet: res.data.userstreet,
             usercity: res.data.usercity,
@@ -62,13 +61,15 @@ export class EditUser extends React.Component {
 
     console.log(user);
 
-    axios.post("http://localhost:5000/users/add", user).then(res => {
-      this.setState({
-        progress: res.data
-      });
+    axios
+      .post("http://localhost:5000/users/update/" + this.state.usertoedit, user)
+      .then(res => {
+        this.setState({
+          progress: res.data
+        });
 
-      console.log(res.data);
-    });
+        console.log(res.data);
+      });
   };
 
   onChangeUserName = e => {

@@ -14,7 +14,7 @@ export class EditUser extends React.Component {
       userstate: "",
       userzip: "",
       userphone: "",
-      usertoedit: "",
+      usertoedit: this.props._id,
       nameError: false,
       emailError: false,
       streetError: false,
@@ -27,8 +27,9 @@ export class EditUser extends React.Component {
   }
 
   componentDidMount = () => {
+    console.log("edituser ID  is " + this.props._id);
     axios
-      .get("http://localhost:5000/users/5de523e59fa9f21ee9378006")
+      .get("http://localhost:5000/users/" + this.state.usertoedit)
 
       .then(
         res =>

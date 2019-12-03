@@ -1,13 +1,13 @@
 import React from "react";
-
 import { Table, Icon, Button } from "semantic-ui-react";
+import { EditUser } from "./editUser";
 
 export class AxiosList extends React.Component {
   doDelete = _id => {
     this.props.doDelete(JSON.stringify(_id, null, 2));
   };
   doEdit = _id => {
-    this.props.doEdit(JSON.stringify(_id, null, 2));
+    EditUser(JSON.stringify(_id, null, 2));
   };
   render() {
     return this.props.data.map((row, i) => {

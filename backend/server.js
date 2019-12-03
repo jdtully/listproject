@@ -18,10 +18,10 @@ const connection = mongoose.connection;
 connection.once("open", () => {
   console.log("MongoDB database Connecton is open");
 });
-//const exerciseRouter = require("./routes/exercises");
+const petsRouter = require("./routes/pets");
 const usersRouter = require("./routes/users");
 
-//app.use("/exercises", exerciseRouter);
+app.use("/pets", petsRouter);
 app.use("/users", usersRouter);
 
 app.listen(port, () => {

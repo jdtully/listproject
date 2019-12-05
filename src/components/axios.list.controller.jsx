@@ -98,9 +98,9 @@ export class PaginatedList extends React.Component {
     this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
     console.log("Left double arrows clicked");
   };
-  doEdit = _id => {
-    console.log("doEdit clicked " + _id);
-  };
+  //doEdit = _id => {
+  //  console.log("doEdit clicked " + _id);
+  // };
 
   doDelete = _id => {
     var id = JSON.parse(_id, null, 2);
@@ -190,6 +190,7 @@ export class PaginatedList extends React.Component {
     console.debug("currentPage in the render is  " + this.state.currentPage);
     return (
       <div>
+        <myNavbar />
         <Table celled striped collapsing>
           <Table.Header>
             {" "}
@@ -298,3 +299,4 @@ export class PaginatedList extends React.Component {
     );
   }
 }
+export default PaginatedList;

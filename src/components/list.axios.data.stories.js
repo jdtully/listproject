@@ -6,6 +6,7 @@ import { PaginatedList } from "./axios.list.controller";
 import { AddPersonAxios } from "./addAxiosRecord";
 import { EditUser } from "./editUser";
 import { AddPetAxios } from "./addpet";
+import { Hello } from "./hello";
 
 var stories = storiesOf("Use Axios", module);
 
@@ -16,4 +17,4 @@ stories.add("paginated people", () => <PaginatedList />);
 stories.add("adding people", () => <AddPersonAxios />);
 stories.add("edit People", () => <EditUser />);
 stories.add("adding pets", () => <AddPetAxios />);
-//stories.add("formik entry form", () => <EntryForm />);
+stories.add("testing hello", () => <Hello />);

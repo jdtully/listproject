@@ -14,7 +14,7 @@ export class EditUser extends React.Component {
       userstate: "",
       userzip: "",
       userphone: "",
-      usertoedit: "5de523e59fa9f21ee9378006",
+      usertoedit: "",
       nameError: false,
       emailError: false,
       streetError: false,
@@ -29,7 +29,7 @@ export class EditUser extends React.Component {
   componentDidMount = () => {
     console.log("edituser ID  is " + this.props._id);
     axios
-      .get("http://localhost:5000/users/" + this.state.usertoedit)
+      .get("http://localhost:5000/users/" + this.props._id)
 
       .then(
         res =>
@@ -63,7 +63,7 @@ export class EditUser extends React.Component {
     console.log(user);
 
     axios
-      .post("http://localhost:5000/users/update/" + this.state.usertoedit, user)
+      .post("http://localhost:5000/users/update/" + this.props._id, user)
       .then(res => {
         this.setState({
           progress: res.data

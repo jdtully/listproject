@@ -1,10 +1,12 @@
 import React from "react";
-import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import MyNavbar from "./components/navBarComponent";
 import PaginatedList from "./components/axios.list.controller";
 
 function App() {
   return (
-    <div className="App">
+    <div>
+      <MyNavbar />
       <PaginatedList />
     </div>
   );

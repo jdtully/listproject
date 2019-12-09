@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Button, Table, Icon, Pagination } from "semantic-ui-react";
 import { AxiosList } from "./list.axios.data";
+import { MyNavbar } from "./navBarPeopleComponent";
 
 export class PaginatedList extends React.Component {
   constructor() {
@@ -190,7 +191,7 @@ export class PaginatedList extends React.Component {
     console.debug("currentPage in the render is  " + this.state.currentPage);
     return (
       <div>
-        <myNavbar />
+        <MyNavbar />
         <Table celled striped collapsing>
           <Table.Header>
             {" "}

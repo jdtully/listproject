@@ -1,20 +1,22 @@
 import React from "react";
 import { Table, Icon, Button } from "semantic-ui-react";
-import { EditUser } from "./editUser";
 
 export class AxiosList extends React.Component {
   doDelete = _id => {
     this.props.doDelete(JSON.stringify(_id, null, 2));
   };
   doEdit = _id => {
-    EditUser(JSON.stringify(_id, null, 2));
+    this.props.doEdit(JSON.stringify(_id, null, 2));
   };
+
   render() {
     return this.props.data.map((row, i) => {
       return (
         <React.Fragment>
           <Table.Row key={i}>
-            <Table.Cell>{row.username}</Table.Cell>
+            <Table.Cell Link to={`/users/edit/${row._id}`}>
+              {row.username}
+            </Table.Cell>
             <Table.Cell>{row.userstreet}</Table.Cell>
             <Table.Cell>{row.usercity}</Table.Cell>
             <Table.Cell>{row.userstate}</Table.Cell>

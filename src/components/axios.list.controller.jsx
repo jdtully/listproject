@@ -101,6 +101,16 @@ export class PaginatedList extends React.Component {
   doEdit = _id => {
     console.log("doEdit clicked " + _id);
   };
+  handlePaginationChange = (e, { activePage }) => {
+    var currentSort = this.state.currentSort;
+
+    console.log("Active Page is " + JSON.stringify(activePage, null, 2));
+    var currentSortDirection = this.state.currentSortDirection;
+    var pageToRender = JSON.stringify(activePage, null, 2);
+    this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
+
+    this.setState({ activePage });
+  };
 
   doDelete = _id => {
     var id = JSON.parse(_id, null, 2);
@@ -265,6 +275,7 @@ export class PaginatedList extends React.Component {
         <h1>Current Sort ={this.state.sortOrderDisplay}</h1>
         <Pagination
           defaultActivePage={this.state.currentPage}
+          onPageChange={this.handlePaginationChange}
           ellipsisItem={{
             content: <Icon name="ellipsis horizontal" />,
             icon: true

@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 
 import { Form, Button } from "semantic-ui-react";
-console.log("edit user  called");
 
 export class EditUser extends React.Component {
   constructor(props) {
@@ -16,7 +15,7 @@ export class EditUser extends React.Component {
       userstate: "",
       userzip: "",
       userphone: "",
-      usertoedit: this.props._id,
+      usertoedit: "",
       nameError: false,
       emailError: false,
       streetError: false,
@@ -29,9 +28,13 @@ export class EditUser extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log("we are in edit user" + JSON.parse(this.props._id));
+    const id = this.props.match.params.id;
+    console.log(
+      "we are in edit user" +
+        JSON.stringify(this.props.match.params.id, null, 2)
+    );
     axios
-      .get("http://localhost:5000/users/?" + this.props._id)
+      .get("http://localhost:5000/users/" + id)
 
       .then(
         res =>
@@ -46,7 +49,9 @@ export class EditUser extends React.Component {
             useremail: res.data.useremail,
             usergender: res.data.usergender
           }),
-        console.log("component did mount" + (this.state.username, null, 2))
+        console.log(
+          "component did mount" + JSON.stringify(this.state.username, null, 2)
+        )
       );
   };
   onSubmit = e => {

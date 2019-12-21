@@ -1,5 +1,6 @@
 import React from "react";
 import { Table, Icon, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 export class AxiosList extends React.Component {
   doDelete = _id => {
@@ -14,9 +15,7 @@ export class AxiosList extends React.Component {
       return (
         <React.Fragment>
           <Table.Row key={i}>
-            <Table.Cell selectable>
-              <a href="/edit/row._id">{row.username}</a>
-            </Table.Cell>
+            <Table.Cell selectable>{row.username}</Table.Cell>
             <Table.Cell>{row.userstreet}</Table.Cell>
             <Table.Cell>{row.usercity}</Table.Cell>
             <Table.Cell>{row.userstate}</Table.Cell>
@@ -26,10 +25,7 @@ export class AxiosList extends React.Component {
             <Table.Cell>{row.usergender}</Table.Cell>
             <Table.Cell>{row.createdAt}</Table.Cell>
             <Table.Cell>
-              <Button onClick={() => this.doEdit(row._id)}>
-                <Icon name="edit" />
-                {JSON.stringify(row._id)}
-              </Button>
+              <Link to={"/users/" + row._id}>Users</Link>
             </Table.Cell>
             <Table.Cell>
               <Button onClick={() => this.doDelete(row._id)}>

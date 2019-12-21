@@ -9,16 +9,17 @@ function App() {
   return (
     <div>
       <Router>
+        {" "}
+        <div>
+          <PaginatedList />
+        </div>
         <Switch>
           <div className="container">
-            <Route path="/users/" exact component={PaginatedList} />
             <Route path="/users/:id" component={EditUser} />
+            <Route path="/users/" component={PaginatedList} />
           </div>
         </Switch>
       </Router>
-      <div>
-        <PaginatedList />
-      </div>
     </div>
   );
 }

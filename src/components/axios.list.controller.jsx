@@ -5,8 +5,8 @@ import { AxiosList } from "./list.axios.data";
 import { MyNavbar } from "./navBarPeopleComponent";
 
 export class PaginatedList extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       data: [],
       limit: " ",
@@ -99,9 +99,9 @@ export class PaginatedList extends React.Component {
     this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
     console.log("Left double arrows clicked");
   };
-  //doEdit = _id => {
-  //  console.log("doEdit clicked " + _id);
-  // };
+  doEdit = _id => {
+    console.log("doEdit clicked " + _id);
+  };
 
   doDelete = _id => {
     var id = JSON.parse(_id, null, 2);

@@ -14,8 +14,8 @@ export class AxiosList extends React.Component {
       return (
         <React.Fragment>
           <Table.Row key={i}>
-            <Table.Cell Link to={`/users/edit/${row._id}`}>
-              {row.username}
+            <Table.Cell selectable>
+              <a href="/edit/row._id">{row.username}</a>
             </Table.Cell>
             <Table.Cell>{row.userstreet}</Table.Cell>
             <Table.Cell>{row.usercity}</Table.Cell>

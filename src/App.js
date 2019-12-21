@@ -2,11 +2,23 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import PaginatedList from "./components/axios.list.controller";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { EditUser } from "./components/editUser";
 
 function App() {
   return (
     <div>
-      <PaginatedList />
+      <Router>
+        <Switch>
+          <div className="container">
+            <Route path="/users/" exact component={PaginatedList} />
+            <Route path="/users/:id" component={EditUser} />
+          </div>
+        </Switch>
+      </Router>
+      <div>
+        <PaginatedList />
+      </div>
     </div>
   );
 }

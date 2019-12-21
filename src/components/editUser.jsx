@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import { Form, Button } from "semantic-ui-react";
+import { MyNavbar } from "./navBarPeopleComponent";
 
 export class EditUser extends React.Component {
   constructor(props) {
@@ -182,6 +183,7 @@ export class EditUser extends React.Component {
   render() {
     return (
       <div>
+        <MyNavbar />
         <h3>Edit User</h3>
 
         <Form>

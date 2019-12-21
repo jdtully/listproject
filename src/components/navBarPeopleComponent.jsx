@@ -8,9 +8,7 @@ export class MyNavbar extends Component {
         <Navbar bg="primary" variant="dark">
           <Navbar.Brand href="#home">Jeff's Kickass Program </Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="/">Users</Nav.Link>
-            <Nav.Link href="/edit/:id">Edit Users</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link href="/users/">Users</Nav.Link>
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />

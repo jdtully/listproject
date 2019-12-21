@@ -15,7 +15,7 @@ export class AxiosList extends React.Component {
       return (
         <React.Fragment>
           <Table.Row key={i}>
-            <Table.Cell selectable>{row.username}</Table.Cell>
+            <Table.Cell>{row.username}</Table.Cell>
             <Table.Cell>{row.userstreet}</Table.Cell>
             <Table.Cell>{row.usercity}</Table.Cell>
             <Table.Cell>{row.userstate}</Table.Cell>

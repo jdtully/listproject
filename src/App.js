@@ -9,14 +9,10 @@ function App() {
   return (
     <div>
       <Router>
-        {" "}
-        <div>
-          <PaginatedList />
-        </div>
         <Switch>
           <div className="container">
             <Route path="/users/:id" component={EditUser} />
-            <Route path="/users/" component={PaginatedList} />
+            <Route path="/users/" exact component={PaginatedList} />
           </div>
         </Switch>
       </Router>

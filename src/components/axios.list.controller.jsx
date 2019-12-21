@@ -16,7 +16,6 @@ export class PaginatedList extends React.Component {
       totalPages: "",
       currentSort: "username",
       currentSortDirection: "1",
-      userToEdit: " ",
       colorSortDateUpArrow: "grey",
       colorSortDateDownArrow: "grey",
       colorSortNameUpArrow: "grey",
@@ -24,7 +23,7 @@ export class PaginatedList extends React.Component {
 
       disabledDownButton: true,
       disabledUpButton: false,
-      sortOrderDisplay: "  ascending"
+      sortOrderDisplay: "ascending"
     };
   }
 
@@ -124,7 +123,7 @@ export class PaginatedList extends React.Component {
 
   doAxiosCalls = (pageToRender, currentSort, currentSortDirection) => {
     var sortOrderDisplay =
-      currentSortDirection === "1" ? "  ascending" : "  descending";
+      currentSortDirection === "1" ? "ascending" : "descending";
     var currentSortOrder = {};
     currentSortOrder[currentSort] = currentSortDirection;
     console.debug("doAxiosCalls Called");
@@ -151,9 +150,9 @@ export class PaginatedList extends React.Component {
         this.setState({
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
-            res.data.offset + 1 + res.data.limit > res.data.total
-              ? true
-              : false,
+            res.data.offset +
+            1 +
+            (res.data.limit > res.data.total ? true : false),
           colorSortDateUpArrow:
             this.state.currentSort === "createdAt" &&
             this.state.currentSortDirection === "1"

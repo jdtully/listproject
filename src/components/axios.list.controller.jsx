@@ -150,9 +150,9 @@ export class PaginatedList extends React.Component {
         this.setState({
           disabledDownButton: res.data.offset - 1 > 0 ? false : true,
           disabledUpButton:
-            res.data.offset +
-            1 +
-            (res.data.limit > res.data.total ? true : false),
+            res.data.offset + 1 + res.data.limit > res.data.total
+              ? true
+              : false,
           colorSortDateUpArrow:
             this.state.currentSort === "createdAt" &&
             this.state.currentSortDirection === "1"

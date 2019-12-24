@@ -57,6 +57,7 @@ export class EditUser extends React.Component {
   };
   onSubmit = e => {
     e.preventDefault();
+    const id = this.props.match.params.id;
     const user = {
       username: this.state.username,
       useremail: this.state.useremail,
@@ -70,16 +71,17 @@ export class EditUser extends React.Component {
 
     console.log(user);
 
-    axios
-      .post("http://localhost:5000/users/update/" + this.props._id, user)
-      .then(res => {
-        this.setState({
-          progress: res.data
-        });
-
-        console.log(res.data);
+    axios.post("http://localhost:5000/users/update/" + id, user).then(res => {
+      this.setState({
+        progress: res.data
       });
+
+      console.log(res.data);
+    });
   };
+  onCancel() {
+    window.location = "/users/";
+  }
 
   onChangeUserName = e => {
     this.setState({
@@ -155,6 +157,7 @@ export class EditUser extends React.Component {
     console.log(JSON.stringify(this.state));
     console.log("changed State");
   };
+
   onChangeUserZip = e => {
     this.setState({
       userzip: e.target.value,
@@ -243,6 +246,13 @@ export class EditUser extends React.Component {
             onClick={this.onSubmit}
           >
             Submit
+          </Button>
+          <Button
+            color="blue"
+            className="btn btn-primary"
+            onClick={this.onCancel}
+          >
+            Cancel
           </Button>
         </Form>
 

@@ -15,7 +15,7 @@ export class AxiosList extends React.Component {
       return (
         <React.Fragment>
           <Table.Row key={i}>
-            <Table.Cell text align="left" width="3">
+            <Table.Cell align="left" width="3">
               {row.username}
             </Table.Cell>
             <Table.Cell width="2">{row.userstreet}</Table.Cell>

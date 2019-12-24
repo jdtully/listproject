@@ -28,9 +28,8 @@ export class AxiosList extends React.Component {
               <Link to={"/users/" + row._id}>Users</Link>
             </Table.Cell>
             <Table.Cell>
-              <Button onClick={() => this.doDelete(row._id)}>
-                <Icon name="eraser" />
-                {JSON.stringify(row._id)}
+              <Button size='tiny' onClick={() => this.doDelete(row._id)}>
+                Delete
               </Button>
             </Table.Cell>
           </Table.Row>

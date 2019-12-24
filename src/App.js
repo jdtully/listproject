@@ -10,10 +10,8 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <div className="container">
-            <Route path="/users/:id" component={EditUser} />
-            <Route path="/users/" exact component={PaginatedList} />
-          </div>
+          <Route path="/users/" exact component={PaginatedList} />
+          <Route path="/users/:id" component={EditUser} />
         </Switch>
       </Router>
     </div>

@@ -203,19 +203,17 @@ export class PaginatedList extends React.Component {
         <MyNavbar />
         <Table celled striped collapsing>
           <Table.Header>
-            {" "}
             <Table.Row>
               <Table.HeaderCell>
                 {" Name of Person "}
 
                 <Icon.Group>
-                  {" "}
                   <Icon
                     color={this.state.colorSortNameUpArrow}
                     fitted
                     name="sort ascending"
                     onClick={this.sortNameToggle}
-                  />{" "}
+                  />
                   <Icon
                     fitted
                     color={this.state.colorSortNameDownArrow}

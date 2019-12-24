@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Icon, Button } from "semantic-ui-react";
+import { Table, Icon, Container } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 export class AxiosList extends React.Component {
@@ -15,13 +15,15 @@ export class AxiosList extends React.Component {
       return (
         <React.Fragment>
           <Table.Row key={i}>
-            <Table.Cell>{row.username}</Table.Cell>
-            <Table.Cell>{row.userstreet}</Table.Cell>
-            <Table.Cell>{row.usercity}</Table.Cell>
+            <Table.Cell text align="left" width="3">
+              {row.username}
+            </Table.Cell>
+            <Table.Cell width="2">{row.userstreet}</Table.Cell>
+            <Table.Cell width="2">{row.usercity}</Table.Cell>
             <Table.Cell>{row.userstate}</Table.Cell>
             <Table.Cell>{row.userzip}</Table.Cell>
             <Table.Cell>{row.userphone}</Table.Cell>
-            <Table.Cell>{row.useremail}</Table.Cell>
+            <Table.Cell width="3">{row.useremail}</Table.Cell>
             <Table.Cell>{row.usergender}</Table.Cell>
             <Table.Cell>{row.createdAt}</Table.Cell>
             <Table.Cell>

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Button, Table, Icon, Pagination } from "semantic-ui-react";
+import { Button, Table, Icon, Pagination, Container } from "semantic-ui-react";
 import { AxiosList } from "./list.axios.data";
 import { MyNavbar } from "./navBarPeopleComponent";
 
@@ -126,7 +126,7 @@ export class PaginatedList extends React.Component {
   handleClickGoToPageLast = () => {
     var currentSort = this.state.currentSort;
     var currentSortDirection = this.state.currentSortDirection;
-    var pageToRender = Math.ceil(this.state.total / this.state.limit);
+    var pageToRender = Math.floor(this.state.total / this.state.limit);
     this.doAxiosCalls(pageToRender, currentSort, currentSortDirection);
     console.log("Right Double Arrows Clicked");
   };
@@ -201,64 +201,66 @@ export class PaginatedList extends React.Component {
     return (
       <div>
         <MyNavbar />
-        <Table celled striped collapsing>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>
-                {" Name of Person "}
+        <div className="Container">
+          <Table celled striped collapsing>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>
+                  {" Name of Person "}
 
-                <Icon.Group>
-                  <Icon
-                    color={this.state.colorSortNameUpArrow}
-                    fitted
-                    name="sort ascending"
-                    onClick={this.sortNameToggle}
-                  />
-                  <Icon
-                    fitted
-                    color={this.state.colorSortNameDownArrow}
-                    name="sort descending"
-                    onClick={this.sortNameToggle}
-                  />
-                </Icon.Group>
-              </Table.HeaderCell>
-              <Table.HeaderCell>Street</Table.HeaderCell>
-              <Table.HeaderCell>City</Table.HeaderCell>
-              <Table.HeaderCell>State</Table.HeaderCell>
-              <Table.HeaderCell>Zip Code</Table.HeaderCell>
-              <Table.HeaderCell>Phone</Table.HeaderCell>
-              <Table.HeaderCell>Email</Table.HeaderCell>
-              <Table.HeaderCell>Gender</Table.HeaderCell>
-              <Table.HeaderCell>
-                {"Customer Since "}
-                <Icon.Group>
-                  {" "}
-                  <Icon
-                    color={this.state.colorSortDateUpArrow}
-                    fitted
-                    name="sort ascending"
-                    onClick={this.sortDateToggle}
-                  />{" "}
-                  <Icon
-                    fitted
-                    color={this.state.colorSortDateDownArrow}
-                    name="sort descending"
-                    onClick={this.sortDateToggle}
-                  />
-                </Icon.Group>
-              </Table.HeaderCell>
-              <Table.HeaderCell>Edit</Table.HeaderCell>
-              <Table.HeaderCell>Del</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <AxiosList
-              data={this.state.data}
-              doEdit={this.doEdit}
-              doDelete={this.doDelete}
-            />
-          </Table.Body>
-        </Table>
+                  <Icon.Group>
+                    <Icon
+                      color={this.state.colorSortNameUpArrow}
+                      fitted
+                      name="sort ascending"
+                      onClick={this.sortNameToggle}
+                    />
+                    <Icon
+                      fitted
+                      color={this.state.colorSortNameDownArrow}
+                      name="sort descending"
+                      onClick={this.sortNameToggle}
+                    />
+                  </Icon.Group>
+                </Table.HeaderCell>
+                <Table.HeaderCell>Street</Table.HeaderCell>
+                <Table.HeaderCell>City</Table.HeaderCell>
+                <Table.HeaderCell>State</Table.HeaderCell>
+                <Table.HeaderCell>Zip Code</Table.HeaderCell>
+                <Table.HeaderCell>Phone</Table.HeaderCell>
+                <Table.HeaderCell>Email</Table.HeaderCell>
+                <Table.HeaderCell>Gender</Table.HeaderCell>
+                <Table.HeaderCell>
+                  {"Customer Since "}
+                  <Icon.Group>
+                    {" "}
+                    <Icon
+                      color={this.state.colorSortDateUpArrow}
+                      fitted
+                      name="sort ascending"
+                      onClick={this.sortDateToggle}
+                    />{" "}
+                    <Icon
+                      fitted
+                      color={this.state.colorSortDateDownArrow}
+                      name="sort descending"
+                      onClick={this.sortDateToggle}
+                    />
+                  </Icon.Group>
+                </Table.HeaderCell>
+                <Table.HeaderCell>Edit</Table.HeaderCell>
+                <Table.HeaderCell>Del</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              <AxiosList
+                data={this.state.data}
+                doEdit={this.doEdit}
+                doDelete={this.doDelete}
+              />
+            </Table.Body>
+          </Table>
+        </div>
 
         <Button
           disabled={this.state.disabledUpButton}
